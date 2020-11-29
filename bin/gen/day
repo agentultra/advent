@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+YEAR=$1
+DAY=$2
+PART=$3
+
+cat >./src/Advent/${YEAR}/Day${DAY}/Part${PART}.hs <<EOF
+module Advent.${YEAR}.Day${DAY}.Part${PART} where
+
+solution :: IO ()
+solution = putStrLn "Not implemented yet"
+EOF
+
+cat >./test/Advent/${YEAR}/Day${DAY}/Part${PART}Spec.hs <<EOF
+module Advent.${YEAR}.Day${DAY}.Part${PART}Spec where
+
+import Test.Hspec
+
+import Advent.${YEAR}.Day${DAY}.Part${PART}
+
+spec :: Spec
+spec = do
+  describe "Advent - ${YEAR} - ${Day} - Part ${PART}" $ do
+    it "Not Implemented" $ do
+      pendingWith "Not implemented"
+EOF

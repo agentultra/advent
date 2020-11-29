@@ -1,0 +1,155 @@
+module Y2020 where
+
+import qualified Advent.Y2020.Day1.Part1 as D1P1
+import qualified Advent.Y2020.Day1.Part2 as D1P2
+import qualified Advent.Y2020.Day2.Part1 as D2P1
+import qualified Advent.Y2020.Day2.Part2 as D2P2
+import qualified Advent.Y2020.Day3.Part1 as D3P1
+import qualified Advent.Y2020.Day3.Part2 as D3P2
+import qualified Advent.Y2020.Day4.Part1 as D4P1
+import qualified Advent.Y2020.Day4.Part2 as D4P2
+import qualified Advent.Y2020.Day5.Part1 as D5P1
+import qualified Advent.Y2020.Day5.Part2 as D5P2
+import qualified Advent.Y2020.Day6.Part1 as D6P1
+import qualified Advent.Y2020.Day6.Part2 as D6P2
+import qualified Advent.Y2020.Day7.Part1 as D7P1
+import qualified Advent.Y2020.Day7.Part2 as D7P2
+import qualified Advent.Y2020.Day8.Part1 as D8P1
+import qualified Advent.Y2020.Day8.Part2 as D8P2
+import qualified Advent.Y2020.Day9.Part1 as D9P1
+import qualified Advent.Y2020.Day9.Part2 as D9P2
+import qualified Advent.Y2020.Day10.Part1 as D10P1
+import qualified Advent.Y2020.Day10.Part2 as D10P2
+import qualified Advent.Y2020.Day11.Part1 as D11P1
+import qualified Advent.Y2020.Day11.Part2 as D11P2
+import qualified Advent.Y2020.Day12.Part1 as D12P1
+import qualified Advent.Y2020.Day12.Part2 as D12P2
+import qualified Advent.Y2020.Day13.Part1 as D13P1
+import qualified Advent.Y2020.Day13.Part2 as D13P2
+import qualified Advent.Y2020.Day14.Part1 as D14P1
+import qualified Advent.Y2020.Day14.Part2 as D14P2
+import qualified Advent.Y2020.Day15.Part1 as D15P1
+import qualified Advent.Y2020.Day15.Part2 as D15P2
+import qualified Advent.Y2020.Day16.Part1 as D16P1
+import qualified Advent.Y2020.Day16.Part2 as D16P2
+import qualified Advent.Y2020.Day17.Part1 as D17P1
+import qualified Advent.Y2020.Day17.Part2 as D17P2
+import qualified Advent.Y2020.Day18.Part1 as D18P1
+import qualified Advent.Y2020.Day18.Part2 as D18P2
+import qualified Advent.Y2020.Day19.Part1 as D19P1
+import qualified Advent.Y2020.Day19.Part2 as D19P2
+import qualified Advent.Y2020.Day20.Part1 as D20P1
+import qualified Advent.Y2020.Day20.Part2 as D20P2
+import qualified Advent.Y2020.Day21.Part1 as D21P1
+import qualified Advent.Y2020.Day21.Part2 as D21P2
+import qualified Advent.Y2020.Day22.Part1 as D22P1
+import qualified Advent.Y2020.Day22.Part2 as D22P2
+import qualified Advent.Y2020.Day23.Part1 as D23P1
+import qualified Advent.Y2020.Day23.Part2 as D23P2
+import qualified Advent.Y2020.Day24.Part1 as D24P1
+import qualified Advent.Y2020.Day24.Part2 as D24P2
+import qualified Advent.Y2020.Day25.Part1 as D25P1
+import qualified Advent.Y2020.Day25.Part2 as D25P2
+
+main :: IO ()
+main = do
+  d1p1 <- D1P1.solution
+  d1p2 <- D1P2.solution
+  d2p1 <- D2P1.solution
+  d2p2 <- D2P2.solution
+  d3p1 <- D3P1.solution
+  d3p2 <- D3P2.solution
+  d4p1 <- D4P1.solution
+  d4p2 <- D4P2.solution
+  d5p1 <- D5P1.solution
+  d5p2 <- D5P2.solution
+  d6p1 <- D6P1.solution
+  d6p2 <- D6P2.solution
+  d7p1 <- D7P1.solution
+  d7p2 <- D7P2.solution
+  d8p1 <- D8P1.solution
+  d8p2 <- D8P2.solution
+  d9p1 <- D9P1.solution
+  d9p2 <- D9P2.solution
+  d10p1 <- D10P1.solution
+  d10p2 <- D10P2.solution
+  d11p1 <- D11P1.solution
+  d11p2 <- D11P2.solution
+  d12p1 <- D12P1.solution
+  d12p2 <- D12P2.solution
+  d13p1 <- D13P1.solution
+  d13p2 <- D13P2.solution
+  d14p1 <- D14P1.solution
+  d14p2 <- D14P2.solution
+  d15p1 <- D15P1.solution
+  d15p2 <- D15P2.solution
+  d16p1 <- D16P1.solution
+  d16p2 <- D16P2.solution
+  d17p1 <- D17P1.solution
+  d17p2 <- D17P2.solution
+  d18p1 <- D18P1.solution
+  d18p2 <- D18P2.solution
+  d19p1 <- D19P1.solution
+  d19p2 <- D19P2.solution
+  d20p1 <- D20P1.solution
+  d20p2 <- D20P2.solution
+  d21p1 <- D21P1.solution
+  d21p2 <- D21P2.solution
+  d22p1 <- D22P1.solution
+  d22p2 <- D22P2.solution
+  d23p1 <- D23P1.solution
+  d23p2 <- D23P2.solution
+  d24p1 <- D24P1.solution
+  d24p2 <- D24P2.solution
+  d25p1 <- D25P1.solution
+  d25p2 <- D25P2.solution
+  putStrLn $ "Day1 Part1: " ++ d1p1
+  putStrLn $ "Day1 Part2: " ++ d1p2
+  putStrLn $ "Day2 Part1: " ++ d2p1
+  putStrLn $ "Day2 Part2: " ++ d2p2
+  putStrLn $ "Day3 Part1: " ++ d3p1
+  putStrLn $ "Day3 Part2: " ++ d3p2
+  putStrLn $ "Day4 Part1: " ++ d4p1
+  putStrLn $ "Day4 Part2: " ++ d4p2
+  putStrLn $ "Day5 Part1: " ++ d5p1
+  putStrLn $ "Day5 Part2: " ++ d5p2
+  putStrLn $ "Day6 Part1: " ++ d6p1
+  putStrLn $ "Day6 Part2: " ++ d6p2
+  putStrLn $ "Day7 Part1: " ++ d8p1
+  putStrLn $ "Day7 Part2: " ++ d8p2
+  putStrLn $ "Day8 Part1: " ++ d8p1
+  putStrLn $ "Day8 Part2: " ++ d8p2
+  putStrLn $ "Day9 Part1: " ++ d9p1
+  putStrLn $ "Day9 Part2: " ++ d9p2
+  putStrLn $ "Day10 Part1: " ++ d10p1
+  putStrLn $ "Day10 Part2: " ++ d10p2
+  putStrLn $ "Day11 Part1: " ++ d11p1
+  putStrLn $ "Day11 Part2: " ++ d11p2
+  putStrLn $ "Day12 Part1: " ++ d12p1
+  putStrLn $ "Day12 Part2: " ++ d12p2
+  putStrLn $ "Day13 Part1: " ++ d13p1
+  putStrLn $ "Day13 Part2: " ++ d13p2
+  putStrLn $ "Day14 Part1: " ++ d14p1
+  putStrLn $ "Day14 Part2: " ++ d14p2
+  putStrLn $ "Day15 Part1: " ++ d15p1
+  putStrLn $ "Day15 Part2: " ++ d15p2
+  putStrLn $ "Day16 Part1: " ++ d16p1
+  putStrLn $ "Day16 Part2: " ++ d16p2
+  putStrLn $ "Day17 Part1: " ++ d18p1
+  putStrLn $ "Day17 Part2: " ++ d18p2
+  putStrLn $ "Day18 Part1: " ++ d18p1
+  putStrLn $ "Day18 Part2: " ++ d18p2
+  putStrLn $ "Day19 Part1: " ++ d19p1
+  putStrLn $ "Day19 Part2: " ++ d19p2
+  putStrLn $ "Day20 Part1: " ++ d20p1
+  putStrLn $ "Day20 Part2: " ++ d20p2
+  putStrLn $ "Day21 Part1: " ++ d21p1
+  putStrLn $ "Day21 Part2: " ++ d21p2
+  putStrLn $ "Day22 Part1: " ++ d22p1
+  putStrLn $ "Day22 Part2: " ++ d22p2
+  putStrLn $ "Day23 Part1: " ++ d23p1
+  putStrLn $ "Day23 Part2: " ++ d23p2
+  putStrLn $ "Day24 Part1: " ++ d24p1
+  putStrLn $ "Day24 Part2: " ++ d24p2
+  putStrLn $ "Day25 Part1: " ++ d25p1
+  putStrLn $ "Day25 Part2: " ++ d25p2
