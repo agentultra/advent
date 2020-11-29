@@ -4,11 +4,14 @@ YEAR=$1
 
 for i in {1..25}
 do
-    ./day ${YEAR} ${i}
+    ./bin/gen/day ${YEAR} ${i} 1
+    ./bin/gen/day ${YEAR} ${i} 2
 done
 
-@cat >./app/${YEAR}.hs <<EOF
-module ${YEAR} where
+mkdir -p ./app/${YEAR}/
+
+cat >./app/${YEAR}/Main.hs <<EOF
+module ${YEAR}.Main where
 
 import qualified Advent.${YEAR}.Day1.Part1 as D1P1
 import qualified Advent.${YEAR}.Day1.Part2 as D1P2

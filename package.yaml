@@ -1,10 +1,10 @@
-name:                advent2020
+name:                advent
 version:             0.1.0.0
-github:              "githubuser/advent2020"
+github:              "agentultra/advent"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2020 Author name here"
+author:              "James King"
+maintainer:          "james@agentultra.com"
+copyright:           "2020 James King"
 
 extra-source-files:
 - README.md
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/advent2020#readme>
+description:         Please see the README on GitHub at <https://github.com/agentultra/advent#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -26,18 +26,19 @@ library:
   source-dirs: src
 
 executables:
-  advent2020-exe:
+  advent2020:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         app/Y2020/
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -main-is Y2020.Main
     dependencies:
-    - advent2020
+    - advent
 
 tests:
-  advent2020-test:
+  advent-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -45,5 +46,5 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - advent2020
+    - advent
     - hspec

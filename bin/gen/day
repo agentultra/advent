@@ -4,12 +4,16 @@ YEAR=$1
 DAY=$2
 PART=$3
 
+mkdir -p ./src/Advent/${YEAR}/Day${DAY}
+
 cat >./src/Advent/${YEAR}/Day${DAY}/Part${PART}.hs <<EOF
 module Advent.${YEAR}.Day${DAY}.Part${PART} where
 
 solution :: IO ()
 solution = putStrLn "Not implemented yet"
 EOF
+
+mkdir -p ./test/Advent/${YEAR}/Day${DAY}
 
 cat >./test/Advent/${YEAR}/Day${DAY}/Part${PART}Spec.hs <<EOF
 module Advent.${YEAR}.Day${DAY}.Part${PART}Spec where

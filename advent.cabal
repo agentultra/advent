@@ -1,0 +1,162 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 80dacc4d5b2d77111522e44a878ae21d2b6f49a0b7077a5bc110523ad608612f
+
+name:           advent
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/agentultra/advent#readme>
+homepage:       https://github.com/agentultra/advent#readme
+bug-reports:    https://github.com/agentultra/advent/issues
+author:         James King
+maintainer:     james@agentultra.com
+copyright:      2020 James King
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/agentultra/advent
+
+library
+  exposed-modules:
+      Advent.Y2020.Day1.Part1
+      Advent.Y2020.Day1.Part2
+      Advent.Y2020.Day10.Part1
+      Advent.Y2020.Day10.Part2
+      Advent.Y2020.Day11.Part1
+      Advent.Y2020.Day11.Part2
+      Advent.Y2020.Day12.Part1
+      Advent.Y2020.Day12.Part2
+      Advent.Y2020.Day13.Part1
+      Advent.Y2020.Day13.Part2
+      Advent.Y2020.Day14.Part1
+      Advent.Y2020.Day14.Part2
+      Advent.Y2020.Day15.Part1
+      Advent.Y2020.Day15.Part2
+      Advent.Y2020.Day16.Part1
+      Advent.Y2020.Day16.Part2
+      Advent.Y2020.Day17.Part1
+      Advent.Y2020.Day17.Part2
+      Advent.Y2020.Day18.Part1
+      Advent.Y2020.Day18.Part2
+      Advent.Y2020.Day19.Part1
+      Advent.Y2020.Day19.Part2
+      Advent.Y2020.Day2.Part1
+      Advent.Y2020.Day2.Part2
+      Advent.Y2020.Day20.Part1
+      Advent.Y2020.Day20.Part2
+      Advent.Y2020.Day21.Part1
+      Advent.Y2020.Day21.Part2
+      Advent.Y2020.Day22.Part1
+      Advent.Y2020.Day22.Part2
+      Advent.Y2020.Day23.Part1
+      Advent.Y2020.Day23.Part2
+      Advent.Y2020.Day24.Part1
+      Advent.Y2020.Day24.Part2
+      Advent.Y2020.Day25.Part1
+      Advent.Y2020.Day25.Part2
+      Advent.Y2020.Day3.Part1
+      Advent.Y2020.Day3.Part2
+      Advent.Y2020.Day4.Part1
+      Advent.Y2020.Day4.Part2
+      Advent.Y2020.Day5.Part1
+      Advent.Y2020.Day5.Part2
+      Advent.Y2020.Day6.Part1
+      Advent.Y2020.Day6.Part2
+      Advent.Y2020.Day7.Part1
+      Advent.Y2020.Day7.Part2
+      Advent.Y2020.Day8.Part1
+      Advent.Y2020.Day8.Part2
+      Advent.Y2020.Day9.Part1
+      Advent.Y2020.Day9.Part2
+  other-modules:
+      Paths_advent
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable advent2020
+  main-is: Main.hs
+  other-modules:
+      Paths_advent
+  hs-source-dirs:
+      app/Y2020/
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Y2020.Main
+  build-depends:
+      advent
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite advent-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Advent.Y2020.Day1.Part1Spec
+      Advent.Y2020.Day1.Part2Spec
+      Advent.Y2020.Day10.Part1Spec
+      Advent.Y2020.Day10.Part2Spec
+      Advent.Y2020.Day11.Part1Spec
+      Advent.Y2020.Day11.Part2Spec
+      Advent.Y2020.Day12.Part1Spec
+      Advent.Y2020.Day12.Part2Spec
+      Advent.Y2020.Day13.Part1Spec
+      Advent.Y2020.Day13.Part2Spec
+      Advent.Y2020.Day14.Part1Spec
+      Advent.Y2020.Day14.Part2Spec
+      Advent.Y2020.Day15.Part1Spec
+      Advent.Y2020.Day15.Part2Spec
+      Advent.Y2020.Day16.Part1Spec
+      Advent.Y2020.Day16.Part2Spec
+      Advent.Y2020.Day17.Part1Spec
+      Advent.Y2020.Day17.Part2Spec
+      Advent.Y2020.Day18.Part1Spec
+      Advent.Y2020.Day18.Part2Spec
+      Advent.Y2020.Day19.Part1Spec
+      Advent.Y2020.Day19.Part2Spec
+      Advent.Y2020.Day2.Part1Spec
+      Advent.Y2020.Day2.Part2Spec
+      Advent.Y2020.Day20.Part1Spec
+      Advent.Y2020.Day20.Part2Spec
+      Advent.Y2020.Day21.Part1Spec
+      Advent.Y2020.Day21.Part2Spec
+      Advent.Y2020.Day22.Part1Spec
+      Advent.Y2020.Day22.Part2Spec
+      Advent.Y2020.Day23.Part1Spec
+      Advent.Y2020.Day23.Part2Spec
+      Advent.Y2020.Day24.Part1Spec
+      Advent.Y2020.Day24.Part2Spec
+      Advent.Y2020.Day25.Part1Spec
+      Advent.Y2020.Day25.Part2Spec
+      Advent.Y2020.Day3.Part1Spec
+      Advent.Y2020.Day3.Part2Spec
+      Advent.Y2020.Day4.Part1Spec
+      Advent.Y2020.Day4.Part2Spec
+      Advent.Y2020.Day5.Part1Spec
+      Advent.Y2020.Day5.Part2Spec
+      Advent.Y2020.Day6.Part1Spec
+      Advent.Y2020.Day6.Part2Spec
+      Advent.Y2020.Day7.Part1Spec
+      Advent.Y2020.Day7.Part2Spec
+      Advent.Y2020.Day8.Part1Spec
+      Advent.Y2020.Day8.Part2Spec
+      Advent.Y2020.Day9.Part1Spec
+      Advent.Y2020.Day9.Part2Spec
+      Paths_advent
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      advent
+    , base >=4.7 && <5
+    , hspec
+  default-language: Haskell2010
