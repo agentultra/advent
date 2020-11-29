@@ -20,10 +20,16 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/agentultra/advent#readme>
 
 dependencies:
-- base >= 4.7 && < 5
+- base-noprelude >= 4.7 && < 5
+
+default-extensions:
+- OverloadedStrings
+- TypeApplications
 
 library:
   source-dirs: src
+  dependencies:
+  - relude
 
 executables:
   advent2020:

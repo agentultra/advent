@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 80dacc4d5b2d77111522e44a878ae21d2b6f49a0b7077a5bc110523ad608612f
+-- hash: 59bbdee0753b9240e35da26c3ab612e65ff1386f5f4face917d881cf16f843c3
 
 name:           advent
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Advent.Input
       Advent.Y2020.Day1.Part1
       Advent.Y2020.Day1.Part2
       Advent.Y2020.Day10.Part1
@@ -77,12 +78,15 @@ library
       Advent.Y2020.Day8.Part2
       Advent.Y2020.Day9.Part1
       Advent.Y2020.Day9.Part2
+      Prelude
   other-modules:
       Paths_advent
   hs-source-dirs:
       src
+  default-extensions: OverloadedStrings TypeApplications
   build-depends:
-      base >=4.7 && <5
+      base-noprelude >=4.7 && <5
+    , relude
   default-language: Haskell2010
 
 executable advent2020
@@ -91,10 +95,11 @@ executable advent2020
       Paths_advent
   hs-source-dirs:
       app/Y2020/
+  default-extensions: OverloadedStrings TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Y2020.Main
   build-depends:
       advent
-    , base >=4.7 && <5
+    , base-noprelude >=4.7 && <5
   default-language: Haskell2010
 
 test-suite advent-test
@@ -154,9 +159,10 @@ test-suite advent-test
       Paths_advent
   hs-source-dirs:
       test
+  default-extensions: OverloadedStrings TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent
-    , base >=4.7 && <5
+    , base-noprelude >=4.7 && <5
     , hspec
   default-language: Haskell2010
