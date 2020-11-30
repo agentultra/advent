@@ -30,6 +30,7 @@ library:
   source-dirs: src
   dependencies:
   - relude
+  - text
 
 executables:
   advent2020:
