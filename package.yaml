@@ -29,8 +29,13 @@ default-extensions:
 library:
   source-dirs: src
   dependencies:
+  - attoparsec
+  - bytestring
+  - containers
   - relude
   - text
+  - unordered-containers
+  - vector
 
 executables:
   advent2020:
