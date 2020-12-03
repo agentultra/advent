@@ -5,10 +5,11 @@ import Data.Attoparsec.Text (Parser)
 import qualified Data.Attoparsec.Text as A
 import qualified Data.Text as T
 
+import Advent.Parse.Utils
 import Advent.Y2020.Day2.Policy
 
-parseLine :: Text -> Either String (Policy Char, String)
-parseLine = A.eitherResult . A.parse lineP
+parseInput :: Text -> Either String [(Policy Char, String)]
+parseInput = parseInputFile lineP
 
 lineP :: Parser (Policy Char, String)
 lineP = do
@@ -16,7 +17,6 @@ lineP = do
   A.skip (== ':')
   A.skip (== ' ')
   input <- A.takeWhile1 isAlpha
-  A.endOfLine
   pure (p, T.unpack input)
 
 policyP :: Parser (Policy Char)

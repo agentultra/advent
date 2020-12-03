@@ -47,7 +47,7 @@ spec = do
                      ]
         checkMany check checks `shouldBe` 1
 
-    describe "parseLine" $ do
+    describe "parseInput" $ do
       it "should get the whole input string" $ do
-        parseLine "15-16 v: vvvvvvvvnvvvvcvvvvgv\n"
-          `shouldBe` Right (Policy (15, 16) 'v', "vvvvvvvvnvvvvcvvvvgv")
+        parseInput "15-16 v: vvvvvvvvnvvvvcvvvvgv\n"
+          `shouldBe` Right [(Policy (15, 16) 'v', "vvvvvvvvnvvvvcvvvvgv")]

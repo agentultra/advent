@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ef219a81fcabb21078eb0d2678553745ac9de32effd5b032b02b8e78d2e8b8f0
+-- hash: 007c74d285c7a372662b3135484200c29c75bb30833cf7f460ab9363e1338465
 
 name:           advent
 version:        0.1.0.0
@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       Advent.Input
+      Advent.Parse.Utils
       Advent.Text.Utils
       Advent.Y2020.Day1.Part1
       Advent.Y2020.Day1.Part2
