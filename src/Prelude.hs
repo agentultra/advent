@@ -1,7 +1,9 @@
 module Prelude
   ( module Relude
+  , module Relude.Extra.Enum
   , pairs
   , readDecimals
+  , readInt
   , readSignedDecimals
   , readRationals
   , readDoubles
@@ -11,6 +13,7 @@ module Prelude
 import qualified Data.Text as T
 import qualified Data.Text.Read as T
 import Relude
+import Relude.Extra.Enum
 
 -- | Read a comma-separated list of values
 readValuesAs :: T.Reader a -> Text -> Either String [a]
@@ -31,6 +34,12 @@ readRationals = readValuesAs T.rational
 -- | Parse a list of @Double@
 readDoubles :: Text -> Either String [Double]
 readDoubles = readValuesAs T.double
+
+readInt :: Text -> Either String Int
+readInt = read <$> T.decimal
+  where
+    read (Right (i, _)) = Right i
+    read (Left err) = Left err
 
 -- | Break a list into consecutive pairs with a possible remainder for
 -- uneven lists
