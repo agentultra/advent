@@ -1,6 +1,7 @@
 module Prelude
   ( module Relude
   , module Relude.Extra.Enum
+  , eitherToMaybe
   , pairs
   , readDecimals
   , readInt
@@ -40,6 +41,10 @@ readInt = read <$> T.decimal
   where
     read (Right (i, _)) = Right i
     read (Left err) = Left err
+
+eitherToMaybe :: Either a b -> Maybe b
+eitherToMaybe (Left _)  = Nothing
+eitherToMaybe (Right x) = Just x
 
 -- | Break a list into consecutive pairs with a possible remainder for
 -- uneven lists

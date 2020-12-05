@@ -1,6 +1,5 @@
 module Advent.Y2020.Day4.Parse where
 
-import Control.Monad
 import Data.Attoparsec.Text
 import Data.Char
 import qualified Data.Map.Strict as M
@@ -34,7 +33,6 @@ keyValueP = do
 
 passportP :: Parser (Map PassportKey Text)
 passportP = do
-  --kv <- keyValueP `sepBy'` eolOrSpace
   kv <- many1' keyValueP <* endOfLine
   pure $ M.fromList kv
 
