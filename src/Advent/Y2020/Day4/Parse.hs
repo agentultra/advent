@@ -29,13 +29,14 @@ keyValueP :: Parser (PassportKey, Text)
 keyValueP = do
   key <- passportKeyP
   skip (== ':')
-  val <- takeWhile1 isAlphaNum
+  val <- takeWhile1 (not . isSpace) <* eolOrSpace
   pure (key, val)
 
 passportP :: Parser (Map PassportKey Text)
 passportP = do
-  kv <- keyValueP `sepBy'` eolOrSpace
+  --kv <- keyValueP `sepBy'` eolOrSpace
+  kv <- many1' keyValueP <* endOfLine
   pure $ M.fromList kv
 
 parsePassports :: Text -> Either String [Map PassportKey Text]
-parsePassports = parseOnly (many' passportP <* string "\n\n")
+parsePassports = parseOnly $ many' passportP

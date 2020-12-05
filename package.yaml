@@ -61,4 +61,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - advent
+    - attoparsec
+    - containers
     - hspec
