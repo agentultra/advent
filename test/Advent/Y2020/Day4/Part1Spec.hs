@@ -58,3 +58,45 @@ spec = do
         parsePassports input
           `shouldBe`
           Right [expected, expected]
+
+    describe "Passport.fromMap" $ do
+      -- I'm not certain this is the best approach, we're assuming
+      -- that during parsing that duplicate entries don't matter and
+      -- we'll and up picking whatever one `M.fromList` chooses
+      -- (probably the last one).
+      --
+      -- If we can assume that there are no duplicate k/v pairs or the
+      -- above assumption happens to be correct, hooray this is good.
+      -- But the spec nor the input seems to say anything about this...
+      it "should construct a valid Passport from k-v pairs" $ do
+        let input = M.fromList [ (BYR, "2012")
+                               , (IYR, "1956")
+                               , (ECL, "#9b82e8")
+                               , (EYR, "2003")
+                               , (CID, "214")
+                               , (HGT, "167in")
+                               , (HCL, "2385ac")
+                               , (PID, "483285062")
+                               ]
+        let expected = Passport
+                       (Year "2012")
+                       (Year "1956")
+                       (Year "2003")
+                       (Height "167in")
+                       (HairColor "2385ac")
+                       (EyeColor "#9b82e8")
+                       (PassportID "483285062")
+                       (Just $ CountryID "214")
+        fromMap input `shouldBe` Right expected
+
+      it "should fail for missing required fields" $ do
+        let input = M.fromList [ (BYR, "2012")
+                               -- , (IYR, "1956")
+                               , (ECL, "#9b82e8")
+                               , (EYR, "2003")
+                               , (CID, "214")
+                               , (HGT, "167in")
+                               , (HCL, "2385ac")
+                               , (PID, "483285062")
+                               ]
+        fromMap input `shouldBe` Left "Missing iyr"
