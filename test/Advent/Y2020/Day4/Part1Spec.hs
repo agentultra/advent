@@ -79,14 +79,14 @@ spec = do
                                , (PID, "483285062")
                                ]
         let expected = Passport
-                       (Year "2012")
-                       (Year "1956")
-                       (Year "2003")
-                       (Height "167in")
-                       (HairColor "2385ac")
-                       (EyeColor "#9b82e8")
-                       (PassportID "483285062")
-                       (Just $ CountryID "214")
+                       "2012"
+                       "1956"
+                       "2003"
+                       "167in"
+                       "2385ac"
+                       "#9b82e8"
+                       "483285062"
+                       (Just $ "214")
         fromMap input `shouldBe` Right expected
 
       it "should fail for missing required fields" $ do
