@@ -33,7 +33,6 @@ library:
   - attoparsec
   - bytestring
   - containers
-  - data-fix
   - errors
   - relude
   - text
