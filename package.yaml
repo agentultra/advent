@@ -23,8 +23,10 @@ dependencies:
 - base-noprelude >= 4.7 && < 5
 
 default-extensions:
+- GADTs
 - LambdaCase
 - OverloadedStrings
+- StandaloneDeriving
 - TypeApplications
 
 library:

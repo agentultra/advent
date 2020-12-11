@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 929e59f015dfd6d5aea17089ef6a501c8dd5b46b3104b88e389da57519256ab9
+-- hash: 21e53031193824310475ef6870e97eef544da9b76ba172f8832cc9d933eea0cb
 
 name:           advent
 version:        0.1.0.0
@@ -86,6 +86,9 @@ library
       Advent.Y2020.Day7.Parse
       Advent.Y2020.Day7.Part1
       Advent.Y2020.Day7.Part2
+      Advent.Y2020.Day8.Asm
+      Advent.Y2020.Day8.Computer
+      Advent.Y2020.Day8.Parse
       Advent.Y2020.Day8.Part1
       Advent.Y2020.Day8.Part2
       Advent.Y2020.Day9.Part1
@@ -95,7 +98,7 @@ library
       Paths_advent
   hs-source-dirs:
       src
-  default-extensions: LambdaCase OverloadedStrings TypeApplications
+  default-extensions: GADTs LambdaCase OverloadedStrings StandaloneDeriving TypeApplications
   build-depends:
       attoparsec
     , base-noprelude >=4.7 && <5
@@ -114,7 +117,7 @@ executable advent2020
       Paths_advent
   hs-source-dirs:
       app/Y2020/
-  default-extensions: LambdaCase OverloadedStrings TypeApplications
+  default-extensions: GADTs LambdaCase OverloadedStrings StandaloneDeriving TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Y2020.Main
   build-depends:
       advent
@@ -178,7 +181,7 @@ test-suite advent-test
       Paths_advent
   hs-source-dirs:
       test
-  default-extensions: LambdaCase OverloadedStrings TypeApplications
+  default-extensions: GADTs LambdaCase OverloadedStrings StandaloneDeriving TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent

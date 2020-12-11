@@ -6,6 +6,6 @@ import Advent.Y2020.Day8.Part1
 
 spec :: Spec
 spec = do
-  describe "Advent - Y2020 -  - Part 1" $ do
+  describe "Advent - Y2020 - Day 8 - Part 1" $ do
     it "Not Implemented" $ do
       pendingWith "Not implemented"
