@@ -3,9 +3,7 @@ module Advent.Y2020.Day1.Part1 where
 import Data.Text.Read as T
 
 import Advent.Input
-
-combinations2 :: [a] -> [(a, a)]
-combinations2 xs = [(x, y) | (x:ys) <- tails xs, y <- ys]
+import Advent.List
 
 solution :: IO ()
 solution = do

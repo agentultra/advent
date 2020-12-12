@@ -1,6 +1,7 @@
 module Advent.Y2020.Day9.Part1 where
 
 import Advent.Input
+import Advent.List
 
 -- | Collect a value from the list and the _n_ values preceding it
 prior :: Int -> [a] -> [(a, [a])]
@@ -10,9 +11,6 @@ prior n
   . filter (\l -> length l == (n + 1))
   . map (reverse . (\l -> drop (length l - (n + 1)) l))
   . inits
-
-combinations2 :: [a] -> [(a, a)]
-combinations2 xs = [(x, y) | (x:ys) <- tails xs, y <- ys]
 
 sum2 :: Num a => (a, a) -> a
 sum2 (x, y) = x + y
