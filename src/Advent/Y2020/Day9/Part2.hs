@@ -1,16 +1,15 @@
 module Advent.Y2020.Day9.Part2 where
 
-import Data.Vector (Vector, (!))
+import Data.Vector (Vector)
 import qualified Data.Vector as V
 
 import Advent.Input
-import Advent.Y2020.Day9.Part1
 
 data SearchState
   = SearchState
-  { i  :: Int
-  , j  :: Int
-  , t  :: Int
+  { i  :: !Int
+  , j  :: !Int
+  , t  :: !Int
   , xs :: Vector Int
   }
 
