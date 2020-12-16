@@ -63,6 +63,7 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - advent
+    - unordered-containers
     - attoparsec
     - containers
     - hspec

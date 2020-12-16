@@ -32,7 +32,7 @@ detectLoop = do
   case prg !? pc of
     Nothing -> pure OutOfBounds
     Just (op, i) | (pc, (op, i)) `S.member` seen -> pure InfiniteLoop
-                 | pc == V.length prg - 1 -> do
+                 | pc == V.length prg - 1 ->
                    if op == Acc
                      then put s { loopStateAccumulator = acc + i } >> pure Terminated
                      else pure Terminated

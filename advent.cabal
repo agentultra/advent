@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b0d7ed24c2b398e12eacec2c3605b74c32e637f7a0869c728979952fb5630943
+-- hash: 5b60a01ad99b65a7a7df2bbd6ef0f0725d63bd699afbff4f5edaa9b1ebcad70e
 
 name:           advent
 version:        0.1.0.0
@@ -35,6 +35,7 @@ library
       Advent.Y2020.Day1.Part2
       Advent.Y2020.Day10.Part1
       Advent.Y2020.Day10.Part2
+      Advent.Y2020.Day11.Grid
       Advent.Y2020.Day11.Part1
       Advent.Y2020.Day11.Part2
       Advent.Y2020.Day12.Part1
@@ -190,4 +191,5 @@ test-suite advent-test
     , base-noprelude >=4.7 && <5
     , containers
     , hspec
+    , unordered-containers
   default-language: Haskell2010
