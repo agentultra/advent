@@ -33,8 +33,8 @@ visibleStep :: Grid -> Grid
 visibleStep grid = H.foldlWithKey' (applyRule grid) H.empty grid
   where
     applyRule g g' c 'L'
-      | visibleUnoccupied g c = H.insert c 'L' g'
-      | otherwise             = H.insert c '#' g'
+      | visibleUnoccupied g c = H.insert c '#' g'
+      | otherwise             = H.insert c 'L' g'
     applyRule g g' c '#'
       | visibleOccupied g c = H.insert c 'L' g'
       | otherwise           = H.insert c '#' g'
@@ -43,7 +43,7 @@ visibleStep grid = H.foldlWithKey' (applyRule grid) H.empty grid
 visibleUnoccupied :: Grid -> (Int, Int) -> Bool
 visibleUnoccupied grid coord = flipUnoccupied . H.lookup coord $ grid
   where
-    flipUnoccupied (Just 'L') = visibleSeats grid coord Unoccupied == Just 0
+    flipUnoccupied (Just 'L') = visibleSeats grid coord Occupied == Just 0
     flipUnoccupied _ = False
 
 visibleOccupied :: Grid -> (Int, Int) -> Bool
