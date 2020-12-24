@@ -26,6 +26,7 @@ default-extensions:
 - GADTs
 - LambdaCase
 - OverloadedStrings
+- RecordWildCards
 - StandaloneDeriving
 - TypeApplications
 

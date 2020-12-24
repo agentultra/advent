@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5b60a01ad99b65a7a7df2bbd6ef0f0725d63bd699afbff4f5edaa9b1ebcad70e
+-- hash: b1e73d5c3dd3c6e90bbdcdc0bd06a36de7d3e33d2fc71134a6dc88c79c7ffd4b
 
 name:           advent
 version:        0.1.0.0
@@ -38,8 +38,10 @@ library
       Advent.Y2020.Day11.Grid
       Advent.Y2020.Day11.Part1
       Advent.Y2020.Day11.Part2
+      Advent.Y2020.Day12.Parse
       Advent.Y2020.Day12.Part1
       Advent.Y2020.Day12.Part2
+      Advent.Y2020.Day12.Ship
       Advent.Y2020.Day13.Part1
       Advent.Y2020.Day13.Part2
       Advent.Y2020.Day14.Part1
@@ -100,7 +102,7 @@ library
       Paths_advent
   hs-source-dirs:
       src
-  default-extensions: GADTs LambdaCase OverloadedStrings StandaloneDeriving TypeApplications
+  default-extensions: GADTs LambdaCase OverloadedStrings RecordWildCards StandaloneDeriving TypeApplications
   build-depends:
       attoparsec
     , base-noprelude >=4.7 && <5
@@ -119,7 +121,7 @@ executable advent2020
       Paths_advent
   hs-source-dirs:
       app/Y2020/
-  default-extensions: GADTs LambdaCase OverloadedStrings StandaloneDeriving TypeApplications
+  default-extensions: GADTs LambdaCase OverloadedStrings RecordWildCards StandaloneDeriving TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Y2020.Main
   build-depends:
       advent
@@ -183,7 +185,7 @@ test-suite advent-test
       Paths_advent
   hs-source-dirs:
       test
-  default-extensions: GADTs LambdaCase OverloadedStrings StandaloneDeriving TypeApplications
+  default-extensions: GADTs LambdaCase OverloadedStrings RecordWildCards StandaloneDeriving TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent
