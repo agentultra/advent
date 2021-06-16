@@ -22,6 +22,18 @@ data Instruction a b where
   Turn :: Relative -> Degree -> Instruction a b
   Go   :: Translation -> Int -> Instruction a b
 
+-- | A waypoint is relative to a Ship.  The Ship is always at the
+-- origin, (0, 0).
+data WayPoint
+  = WayPoint
+  { wayPointX :: Int
+  , wayPointY :: Int
+  }
+  deriving (Eq, Show)
+
+defaultWayPoint :: WayPoint
+defaultWayPoint = WayPoint 10 (-1)
+
 data Ship
   = Ship
   { orientation :: Degree
@@ -56,6 +68,22 @@ command (Go Forward amount) ship =
 processCommands :: Ship -> NonEmpty (Instruction a b) -> Ship
 processCommands = foldl' (flip command)
 
+wayPointCommand :: (WayPoint, Ship) -> Instruction a b -> (WayPoint, Ship)
+wayPointCommand (wp, ship) (Move cardinal amount) = case cardinal of
+  North -> (wp { wayPointY = wayPointY wp - amount }, ship)
+  East  -> (wp { wayPointX = wayPointX wp + amount }, ship)
+  South -> (wp { wayPointY = wayPointY wp + amount }, ship)
+  West  -> (wp { wayPointX = wayPointX wp - amount }, ship)
+
+wayPointCommand (wp, ship) (Turn relative amount) =
+  (rotateWayPoint wp relative amount, ship)
+
+wayPointCommand (wp@(WayPoint wx wy), Ship o sx sy) (Go Forward amount) =
+  (wp, Ship o (amount * wx + sx) (amount * wy + sy))
+
+processWayPointCommands :: (WayPoint, Ship) -> NonEmpty (Instruction a b) -> (WayPoint, Ship)
+processWayPointCommands = foldl' wayPointCommand
+
 distance :: Ship -> Int
 distance Ship {..} = abs positionX + abs positionY
 
@@ -65,3 +93,16 @@ unitV2 deg = let r = (pi / 2) - deg2rad deg in (cos r, sin r)
 
 deg2rad :: Degree -> Float
 deg2rad (Degree d) = d * 0.01745329 -- roughly pi/180
+
+rotateWayPoint :: WayPoint -> Relative -> Degree -> WayPoint
+rotateWayPoint WayPoint {..} turn (Degree deg)
+  | floor deg == 90 =
+    if turn == Right'
+    then WayPoint (-wayPointY) wayPointX
+    else WayPoint wayPointY (-wayPointX)
+  | floor deg == 180 = WayPoint (-wayPointX) (-wayPointY)
+  | floor deg == 270 =
+    if turn == Right'
+    then WayPoint (wayPointY) (-wayPointX)
+    else WayPoint (-wayPointY) wayPointX
+  | otherwise = error . toText $ "We made a wrong assumption..." ++ show deg
