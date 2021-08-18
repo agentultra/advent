@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dcf25608028f49aa412efbd69461849f8154ea2fd342b4322cda66e2e6bb4b3a
+-- hash: e0118020def01ec6533753d4a76a150332218fc215cc467e458c4e1ce2f2b358
 
 name:           advent
 version:        0.1.0.0
@@ -104,7 +104,13 @@ library
       Paths_advent
   hs-source-dirs:
       src
-  default-extensions: GADTs LambdaCase OverloadedStrings RecordWildCards StandaloneDeriving TypeApplications
+  default-extensions:
+      GADTs
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      StandaloneDeriving
+      TypeApplications
   build-depends:
       attoparsec
     , base-noprelude >=4.7 && <5
@@ -123,7 +129,13 @@ executable advent2020
       Paths_advent
   hs-source-dirs:
       app/Y2020/
-  default-extensions: GADTs LambdaCase OverloadedStrings RecordWildCards StandaloneDeriving TypeApplications
+  default-extensions:
+      GADTs
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      StandaloneDeriving
+      TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Y2020.Main
   build-depends:
       advent
@@ -187,7 +199,13 @@ test-suite advent-test
       Paths_advent
   hs-source-dirs:
       test
-  default-extensions: GADTs LambdaCase OverloadedStrings RecordWildCards StandaloneDeriving TypeApplications
+  default-extensions:
+      GADTs
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      StandaloneDeriving
+      TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent

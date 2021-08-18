@@ -10,4 +10,5 @@ solution = do
   input <- T.readFile "data/2020/Day13.txt"
   case parseInput input of
     Left err -> putStrLn err
-    Right result -> putStrLn $ show .  uncurry (part1Solution (fst result)) . uncurry soonestBusFromTime $ result
+    Right result -> print
+      $ uncurry (part1Solution (fst result)) . uncurry soonestBusFromTime result

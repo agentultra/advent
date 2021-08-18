@@ -1,0 +1,19 @@
+* Part 2
+  | busIdx | bus id | time | bus state  |
+  |--------+--------+------+------------|
+  |      0 |      7 |    0 | in transit |
+  |      0 |      7 |    1 | in transit |
+  |      0 |      7 |    2 | stopped    |
+  |      1 |     14 |    0 | in transit |
+  |      1 |     14 |    1 | in transit |
+  |      1 |     14 |    2 | in transit |
+  |      1 |     14 |    3 | stopped    |
+  |      4 |     57 |   23 | stopped    |
+
+  2: [7]
+  3: [14, 57]
+  4: ...
+
+  .
+  .
+  9: [7]

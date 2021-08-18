@@ -21,5 +21,12 @@ parseInput = parseRest . headToTuple . T.lines
     parseRest :: (Text, Text) -> Either String (Int, NonEmpty Bus)
     parseRest (startText, busText) = do
       start <- T.decimal @Int $ startText
-      let buses = rights . map (T.decimal @Int) . T.splitOn "," $ busText
+      let buses = rights . map (T.decimal @Int) . map xBusses . T.splitOn "," $ busText
       pure (fst start, N.fromList $ map (Bus . fst) buses)
+
+    -- Interpret `x` as `-1` so that we parse those busses and
+    -- preserve the indices of the puzzle input which is used in Part2
+    -- to figure out the offsets from t.
+    xBusses :: Text -> Text
+    xBusses "x" = "-1"
+    xBusses x   = x

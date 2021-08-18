@@ -1,7 +1,9 @@
 {-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE TupleSections #-}
 
 module Advent.Y2020.Day13.Bus where
 
+import Data.Bifunctor
 import Data.Function
 import Data.List
 import Data.List.NonEmpty (NonEmpty)
@@ -18,7 +20,7 @@ busSchedule start b@(Bus busId) =
   (b, [ (t, if t `mod` busId == 0 then Stopped else InTransit) | t <- [start..] ])
 
 soonestBusFromTime :: Int -> NonEmpty Bus -> (Bus, Int)
-soonestBusFromTime start busses = minimumBy (compare `on` snd) . catSchedules . map (\(b, route) -> (b, find ((== Stopped) . snd) route)) . foldMap (pure . busSchedule start) $ busses
+soonestBusFromTime start = minimumBy (compare `on` snd) . catSchedules . map (second (find ((== Stopped) . snd))) . foldMap (pure . busSchedule start)
   where
     catSchedules :: [(Bus, Maybe (Int, BusState))] -> [(Bus, Int)]
     catSchedules [] = []
@@ -27,3 +29,14 @@ soonestBusFromTime start busses = minimumBy (compare `on` snd) . catSchedules . 
 
 part1Solution :: Int -> Bus -> Int -> Int
 part1Solution start (Bus bus) time = (time - start) * bus
+
+part2Solution :: Int -> NonEmpty Bus -> Int
+part2Solution start = _ . filter nonXBusses . zip [0..] . concatMap (flattenSchedule . busSchedule start)
+  where
+    flattenSchedule :: (Bus, [(Int, BusState)]) -> [(Bus, (Int, BusState))]
+    flattenSchedule (b, schedule) = map (b,) schedule
+
+    -- Only keep the Bus' with a non-X or non-"-1" Bus ID
+    nonXBusses :: (Integer, (Bus, (Int, BusState))) -> Bool
+    nonXBusses (_, (Bus (-1), t)) = False
+    nonXBusses _ = True
