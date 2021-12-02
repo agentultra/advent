@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e0118020def01ec6533753d4a76a150332218fc215cc467e458c4e1ce2f2b358
+-- hash: 963b4a9930b28c51ed96ba5ccd1ac1d585d153ef193daf6b5e8ada188c2ed8a5
 
 name:           advent
 version:        0.1.0.0
@@ -99,6 +99,58 @@ library
       Advent.Y2020.Day8.Part2
       Advent.Y2020.Day9.Part1
       Advent.Y2020.Day9.Part2
+      Advent.Y2021.Day1.Parse
+      Advent.Y2021.Day1.Part1
+      Advent.Y2021.Day1.Part2
+      Advent.Y2021.Day1.Sonar
+      Advent.Y2021.Day10.Part1
+      Advent.Y2021.Day10.Part2
+      Advent.Y2021.Day11.Part1
+      Advent.Y2021.Day11.Part2
+      Advent.Y2021.Day12.Part1
+      Advent.Y2021.Day12.Part2
+      Advent.Y2021.Day13.Part1
+      Advent.Y2021.Day13.Part2
+      Advent.Y2021.Day14.Part1
+      Advent.Y2021.Day14.Part2
+      Advent.Y2021.Day15.Part1
+      Advent.Y2021.Day15.Part2
+      Advent.Y2021.Day16.Part1
+      Advent.Y2021.Day16.Part2
+      Advent.Y2021.Day17.Part1
+      Advent.Y2021.Day17.Part2
+      Advent.Y2021.Day18.Part1
+      Advent.Y2021.Day18.Part2
+      Advent.Y2021.Day19.Part1
+      Advent.Y2021.Day19.Part2
+      Advent.Y2021.Day2.Part1
+      Advent.Y2021.Day2.Part2
+      Advent.Y2021.Day20.Part1
+      Advent.Y2021.Day20.Part2
+      Advent.Y2021.Day21.Part1
+      Advent.Y2021.Day21.Part2
+      Advent.Y2021.Day22.Part1
+      Advent.Y2021.Day22.Part2
+      Advent.Y2021.Day23.Part1
+      Advent.Y2021.Day23.Part2
+      Advent.Y2021.Day24.Part1
+      Advent.Y2021.Day24.Part2
+      Advent.Y2021.Day25.Part1
+      Advent.Y2021.Day25.Part2
+      Advent.Y2021.Day3.Part1
+      Advent.Y2021.Day3.Part2
+      Advent.Y2021.Day4.Part1
+      Advent.Y2021.Day4.Part2
+      Advent.Y2021.Day5.Part1
+      Advent.Y2021.Day5.Part2
+      Advent.Y2021.Day6.Part1
+      Advent.Y2021.Day6.Part2
+      Advent.Y2021.Day7.Part1
+      Advent.Y2021.Day7.Part2
+      Advent.Y2021.Day8.Part1
+      Advent.Y2021.Day8.Part2
+      Advent.Y2021.Day9.Part1
+      Advent.Y2021.Day9.Part2
       Prelude
   other-modules:
       Paths_advent
@@ -113,7 +165,7 @@ library
       TypeApplications
   build-depends:
       attoparsec
-    , base-noprelude >=4.7 && <5
+    , base-noprelude >=4.12 && <5
     , bytestring
     , containers
     , errors
@@ -136,10 +188,29 @@ executable advent2020
       RecordWildCards
       StandaloneDeriving
       TypeApplications
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Y2020.Main
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2020.Main
   build-depends:
       advent
-    , base-noprelude >=4.7 && <5
+    , base-noprelude >=4.12 && <5
+  default-language: Haskell2010
+
+executable advent2021
+  main-is: Main.hs
+  other-modules:
+      Paths_advent
+  hs-source-dirs:
+      app/Y2021/
+  default-extensions:
+      GADTs
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      StandaloneDeriving
+      TypeApplications
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2021.Main
+  build-depends:
+      advent
+    , base-noprelude >=4.12 && <5
   default-language: Haskell2010
 
 test-suite advent-test
@@ -196,6 +267,56 @@ test-suite advent-test
       Advent.Y2020.Day8.Part2Spec
       Advent.Y2020.Day9.Part1Spec
       Advent.Y2020.Day9.Part2Spec
+      Advent.Y2021.Day1.Part1Spec
+      Advent.Y2021.Day1.Part2Spec
+      Advent.Y2021.Day10.Part1Spec
+      Advent.Y2021.Day10.Part2Spec
+      Advent.Y2021.Day11.Part1Spec
+      Advent.Y2021.Day11.Part2Spec
+      Advent.Y2021.Day12.Part1Spec
+      Advent.Y2021.Day12.Part2Spec
+      Advent.Y2021.Day13.Part1Spec
+      Advent.Y2021.Day13.Part2Spec
+      Advent.Y2021.Day14.Part1Spec
+      Advent.Y2021.Day14.Part2Spec
+      Advent.Y2021.Day15.Part1Spec
+      Advent.Y2021.Day15.Part2Spec
+      Advent.Y2021.Day16.Part1Spec
+      Advent.Y2021.Day16.Part2Spec
+      Advent.Y2021.Day17.Part1Spec
+      Advent.Y2021.Day17.Part2Spec
+      Advent.Y2021.Day18.Part1Spec
+      Advent.Y2021.Day18.Part2Spec
+      Advent.Y2021.Day19.Part1Spec
+      Advent.Y2021.Day19.Part2Spec
+      Advent.Y2021.Day2.Part1Spec
+      Advent.Y2021.Day2.Part2Spec
+      Advent.Y2021.Day20.Part1Spec
+      Advent.Y2021.Day20.Part2Spec
+      Advent.Y2021.Day21.Part1Spec
+      Advent.Y2021.Day21.Part2Spec
+      Advent.Y2021.Day22.Part1Spec
+      Advent.Y2021.Day22.Part2Spec
+      Advent.Y2021.Day23.Part1Spec
+      Advent.Y2021.Day23.Part2Spec
+      Advent.Y2021.Day24.Part1Spec
+      Advent.Y2021.Day24.Part2Spec
+      Advent.Y2021.Day25.Part1Spec
+      Advent.Y2021.Day25.Part2Spec
+      Advent.Y2021.Day3.Part1Spec
+      Advent.Y2021.Day3.Part2Spec
+      Advent.Y2021.Day4.Part1Spec
+      Advent.Y2021.Day4.Part2Spec
+      Advent.Y2021.Day5.Part1Spec
+      Advent.Y2021.Day5.Part2Spec
+      Advent.Y2021.Day6.Part1Spec
+      Advent.Y2021.Day6.Part2Spec
+      Advent.Y2021.Day7.Part1Spec
+      Advent.Y2021.Day7.Part2Spec
+      Advent.Y2021.Day8.Part1Spec
+      Advent.Y2021.Day8.Part2Spec
+      Advent.Y2021.Day9.Part1Spec
+      Advent.Y2021.Day9.Part2Spec
       Paths_advent
   hs-source-dirs:
       test
@@ -210,7 +331,7 @@ test-suite advent-test
   build-depends:
       advent
     , attoparsec
-    , base-noprelude >=4.7 && <5
+    , base-noprelude >=4.12 && <5
     , containers
     , hspec
     , unordered-containers

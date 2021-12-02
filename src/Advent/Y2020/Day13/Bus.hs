@@ -30,13 +30,13 @@ soonestBusFromTime start = minimumBy (compare `on` snd) . catSchedules . map (se
 part1Solution :: Int -> Bus -> Int -> Int
 part1Solution start (Bus bus) time = (time - start) * bus
 
-part2Solution :: Int -> NonEmpty Bus -> Int
-part2Solution start = _ . filter nonXBusses . zip [0..] . concatMap (flattenSchedule . busSchedule start)
-  where
-    flattenSchedule :: (Bus, [(Int, BusState)]) -> [(Bus, (Int, BusState))]
-    flattenSchedule (b, schedule) = map (b,) schedule
+-- part2Solution :: Int -> NonEmpty Bus -> Int
+-- part2Solution start = _ . filter nonXBusses . zip [0..] . concatMap (flattenSchedule . busSchedule start)
+--   where
+--     flattenSchedule :: (Bus, [(Int, BusState)]) -> [(Bus, (Int, BusState))]
+--     flattenSchedule (b, schedule) = map (b,) schedule
 
-    -- Only keep the Bus' with a non-X or non-"-1" Bus ID
-    nonXBusses :: (Integer, (Bus, (Int, BusState))) -> Bool
-    nonXBusses (_, (Bus (-1), t)) = False
-    nonXBusses _ = True
+--     -- Only keep the Bus' with a non-X or non-"-1" Bus ID
+--     nonXBusses :: (Integer, (Bus, (Int, BusState))) -> Bool
+--     nonXBusses (_, (Bus (-1), t)) = False
+--     nonXBusses _ = True

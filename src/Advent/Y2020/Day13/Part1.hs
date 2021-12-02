@@ -8,7 +8,8 @@ import Advent.Y2020.Day13.Parse
 solution :: IO ()
 solution = do
   input <- T.readFile "data/2020/Day13.txt"
-  case parseInput input of
-    Left err -> putStrLn err
-    Right result -> print
-      $ uncurry (part1Solution (fst result)) . uncurry soonestBusFromTime result
+  -- case parseInput input of
+  --   Left err -> putStrLn err
+  --   Right result -> print
+  --     $ uncurry (part1Solution (fst result)) . uncurry soonestBusFromTime result
+  putStrLn "Hello"

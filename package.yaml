@@ -20,7 +20,7 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/agentultra/advent#readme>
 
 dependencies:
-- base-noprelude >= 4.7 && < 5
+- base-noprelude >= 4.12 && < 5
 
 default-extensions:
 - GADTs
@@ -50,7 +50,19 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
     - -main-is Y2020.Main
+    dependencies:
+    - advent
+  advent2021:
+    main:                Main.hs
+    source-dirs:         app/Y2021/
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -main-is Y2021.Main
     dependencies:
     - advent
 
