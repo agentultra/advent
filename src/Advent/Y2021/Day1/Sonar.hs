@@ -39,5 +39,5 @@ part1Solution = foldl' countIncreased 0 . adjacentDeltas
     countIncreased count (Increased _ _ ) = count + 1
     countIncreased count _ = count
 
-part2Solution :: [Reading] -> Int
-part2Solution = part1Solution . windowReadings
+part2Solution :: NonEmpty Reading -> Int
+part2Solution = part1Solution . windowReadings . toList
