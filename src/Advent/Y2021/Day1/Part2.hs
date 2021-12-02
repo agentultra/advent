@@ -10,6 +10,5 @@ solution = do
   raw <- T.readFile "data/2021/Day1.txt"
   case parseInput raw of
     Left err -> print err
-    Right readings -> do
-      let s = part2Solution readings
-      print s
+    Right readings ->
+      print . part2Solution . fromList $ readings
