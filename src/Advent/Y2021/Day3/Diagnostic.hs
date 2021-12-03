@@ -15,7 +15,7 @@ binToInt :: String -> Int
 binToInt = foldl' (\acc c -> acc * 2 + digitToInt c) 0
 
 complement :: String -> Maybe String
-complement = sequence . fmap compl
+complement = mapM compl
   where
     compl '1' = Just '0'
     compl '0' = Just '1'
@@ -23,7 +23,7 @@ complement = sequence . fmap compl
 
 part1Solution :: NonEmpty Text -> Maybe Int
 part1Solution bins = do
-  epsilon <- sequence . fmap mostCommon . transpose . fmap T.unpack . toList $ bins
+  epsilon <- mapM mostCommon . transpose . fmap T.unpack . toList $ bins
   gamma <- complement epsilon
   let epsilon' = binToInt epsilon
       gamma' = binToInt gamma
