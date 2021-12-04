@@ -49,7 +49,7 @@ mostCommon xs =
           if allSame . map fst $ withLengths
           then Same
           else case viaNonEmpty head . snd .  maximumBy (comparing fst) $ withLengths of
-                 Nothing -> error "Should never happen..."
+                 Nothing -> error $ T.pack "Should never happen..."
                  Just x -> Most x
   where
     withLength x = (length x, x)
@@ -66,6 +66,36 @@ complement = mapM compl
     compl '0' = Just '1'
     compl _   = Nothing
 
+oxygenRating :: [String] -> Maybe String
+oxygenRating xs = go xs 0
+  where
+    go :: [String] -> Int -> Maybe String
+    go [] _  = Nothing
+    go [x] _ = Just x
+    go xs' i  = do
+      let commons = map mostCommon . transpose $ xs'
+      case commons !! i of
+        Most x -> go (filter (\n -> n !! i == x) xs') (i + 1)
+        Same   -> go (filter (\n -> n !! i == '1') xs') (i + 1)
+        None   -> error $ T.pack "Invariant violated"
+
+scrubberRating :: [String] -> Maybe String
+scrubberRating xs = go xs 0
+  where
+    go :: [String] -> Int -> Maybe String
+    go [] _  = Nothing
+    go [x] _ = Just x
+    go xs' i  = do
+      let commons = map mostCommon . transpose $ xs'
+      case commons !! i of
+        -- We want the _least common_ in this case and exploit the
+        -- fact that we know we're only dealing with '0' and '1'
+        Most '1' -> go (filter (\n -> n !! i == '0') xs') (i + 1)
+        Most '0' -> go (filter (\n -> n !! i == '1') xs') (i + 1)
+        Most _   -> error $ T.pack "Invariant violated"
+        Same     -> go (filter (\n -> n !! i == '0') xs') (i + 1)
+        None     -> error $ T.pack "Invariant violated"
+
 part1Solution :: NonEmpty Text -> Maybe Int
 part1Solution bins = do
   epsilon <- mapM (maybeCommonality . mostCommon) . transpose . fmap T.unpack . toList $ bins
@@ -73,3 +103,10 @@ part1Solution bins = do
   let epsilon' = binToInt epsilon
       gamma' = binToInt gamma
   pure $ epsilon' * gamma'
+
+part2Solution :: NonEmpty Text -> Maybe Int
+part2Solution bins = do
+  let ns = T.unpack <$> toList bins
+  oxygen  <- binToInt <$> oxygenRating ns
+  scrubber <- binToInt <$> scrubberRating ns
+  pure $ oxygen * scrubber

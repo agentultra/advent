@@ -1,4 +1,11 @@
 module Advent.Y2021.Day3.Part2 where
 
+import qualified Data.Text as T
+import qualified Data.Text.IO as T
+
+import Advent.Y2021.Day3.Diagnostic
+
 solution :: IO ()
-solution = putStrLn "Not implemented yet"
+solution = do
+  ns <- T.lines <$> T.readFile "data/2021/Day3.txt"
+  print $ part2Solution $ fromList ns
