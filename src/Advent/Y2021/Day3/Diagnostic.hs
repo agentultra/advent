@@ -33,17 +33,24 @@ maybeCommonality :: Commonality a -> Maybe a
 maybeCommonality (Most a) = Just a
 maybeCommonality _        = Nothing
 
+commonalityFromMaybe :: Maybe a -> Commonality a
+commonalityFromMaybe (Just x) = Most x
+commonalityFromMaybe _        = None
+
 mostCommon :: String -> Commonality Char
 mostCommon xs =
   case group . sort $ xs of
     [] -> None
     xs' ->
-      let withLengths = withLength <$> xs'
-      in if allSame . map fst $ withLengths
-         then Same
-         else case viaNonEmpty head . snd .  maximumBy (comparing fst) $ withLengths of
-                Nothing -> error $ T.pack "Should never happen..."
-                Just x -> Most x
+      case withLength <$> xs' of
+        [] -> None
+        [(_, x)] -> commonalityFromMaybe . viaNonEmpty head $ x
+        withLengths ->
+          if allSame . map fst $ withLengths
+          then Same
+          else case viaNonEmpty head . snd .  maximumBy (comparing fst) $ withLengths of
+                 Nothing -> error "Should never happen..."
+                 Just x -> Most x
   where
     withLength x = (length x, x)
     allSame = and . (zipWith (==) <*> tail)
