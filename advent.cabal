@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 17ebfcf0d34c8a1d3d1d237468b78ee13ddab0f5850a760451e338c8cdc96f69
+-- hash: 6168ff53e9d89dea063a292539f16c279457582e320d5ef8b289a6ba7940c120
 
 name:           advent
 version:        0.1.0.0
@@ -139,7 +139,6 @@ library
       Advent.Y2021.Day24.Part2
       Advent.Y2021.Day25.Part1
       Advent.Y2021.Day25.Part2
-      Advent.Y2021.Day3.Binary
       Advent.Y2021.Day3.Diagnostic
       Advent.Y2021.Day3.Part1
       Advent.Y2021.Day3.Part2
