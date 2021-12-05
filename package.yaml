@@ -38,6 +38,7 @@ library:
   - containers
   - errors
   - relude
+  - split
   - text
   - unordered-containers
   - vector
@@ -80,3 +81,5 @@ tests:
     - attoparsec
     - containers
     - hspec
+    - text
+    - vector

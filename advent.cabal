@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6168ff53e9d89dea063a292539f16c279457582e320d5ef8b289a6ba7940c120
+-- hash: d7b620058b8be47726c4c554d8244103bfe273cf8ff128c96d23fd61edec3e88
 
 name:           advent
 version:        0.1.0.0
@@ -142,6 +142,8 @@ library
       Advent.Y2021.Day3.Diagnostic
       Advent.Y2021.Day3.Part1
       Advent.Y2021.Day3.Part2
+      Advent.Y2021.Day4.Bingo
+      Advent.Y2021.Day4.Parse
       Advent.Y2021.Day4.Part1
       Advent.Y2021.Day4.Part2
       Advent.Y2021.Day5.Part1
@@ -173,6 +175,7 @@ library
     , containers
     , errors
     , relude
+    , split
     , text
     , unordered-containers
     , vector
@@ -337,5 +340,7 @@ test-suite advent-test
     , base-noprelude >=4.12 && <5
     , containers
     , hspec
+    , text
     , unordered-containers
+    , vector
   default-language: Haskell2010
