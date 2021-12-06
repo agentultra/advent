@@ -63,6 +63,9 @@ hasWon b
   = any allPicked (boardRows b)
   || any allPicked (boardCols b)
 
+boardScore :: Board -> Int
+boardScore = V.sum . V.map cellNum . unPicked
+
 play :: [Int] -> State [Board] (Bool, Int)
 play [] = pure (False, 0)
 play (p:ps) = do
@@ -73,7 +76,37 @@ play (p:ps) = do
       put boards'
       play ps
     Just b  ->
-      pure (True, p * (V.sum . V.map cellNum . unPicked $ b))
+      pure (True, p * boardScore b)
 
 part1Solution :: [Int] -> [Board] -> (Bool, Int)
 part1Solution picks = evalState (play picks)
+
+data SquidGame
+  = SquidGame
+  { squidBoards :: [Board]
+  , winningBoards :: [Board]
+  , lastPick :: Int
+  }
+  deriving (Eq, Show)
+
+play2 :: [Int] -> State SquidGame Int
+play2 [] = do
+  (SquidGame _ winners p) <- get
+  case viaNonEmpty head winners of
+    Nothing -> error $ T.pack "No winners"
+    Just w  -> pure $ p * boardScore w
+play2 (p:ps) = do
+  (SquidGame boards winners _) <- get
+  let boards' = map (pick p) boards
+      wins    = filter hasWon boards'
+      remaining = filter (not . hasWon) boards'
+      winners' = reverse wins ++ winners
+  put $ SquidGame remaining winners' p
+  if null remaining
+    then case viaNonEmpty head winners' of
+           Nothing -> error $ T.pack "WAT"
+           Just w -> pure $ p * boardScore w
+    else play2 ps
+
+part2Solution :: [Int] -> [Board] -> Int
+part2Solution picks boards = evalState (play2 picks) $ SquidGame boards [] 0
