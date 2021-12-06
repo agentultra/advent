@@ -2,6 +2,7 @@ module Prelude
   ( module Relude
   , module Relude.Extra.Enum
   , eitherToMaybe
+  , maybeTrue
   , pairs
   , readDecimals
   , readInt
@@ -58,3 +59,8 @@ pairs xs
     go [] = []
     go [_] = []
     go (x:y:xs) = (x, y) : go xs
+
+maybeTrue :: (a -> Bool) -> a -> Maybe a
+maybeTrue p x
+  | p x       = Just x
+  | otherwise = Nothing

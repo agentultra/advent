@@ -12,7 +12,7 @@ import Advent.Y2021.Day4.Bingo
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Part 1" $ do
+  describe "Advent - Y2021 - Part 1" $ do
     describe "boardRows" $ do
       it "should return the rows as they appear in the board" $ do
         let b = Board example1 5 5

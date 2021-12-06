@@ -36,15 +36,6 @@ mkBoard ps = do
     let b = V.fromList $ concat ps
     pure $ Board b w h
 
-maybeTrue :: (a -> Bool) -> a -> Maybe a
-maybeTrue p x
-  | p x       = Just x
-  | otherwise = Nothing
-
--- | Query for the first 'Cell' matching @n@ on the board.
-boardGet :: Int -> Board -> Maybe Cell
-boardGet n (Board grid _ _) = V.find (\(Cell _ cn) -> cn == n) grid
-
 -- | Set the first 'Cell' matching @n@ to picked.
 pick :: Int -> Board -> Board
 pick n b@(Board grid w h) =
@@ -54,8 +45,7 @@ pick n b@(Board grid w h) =
 
 boardRows :: Board -> [Vector Cell]
 boardRows (Board grid w _) =
-  --[V.slice i w grid | i <- [0,(w-1)..(length grid - w)]]
-  map V.fromList . chunksOf w . V.toList $ grid
+  [ V.slice i w grid | i <- [0,w..(length grid - w)] ]
 
 boardCols :: Board -> [Vector Cell]
 boardCols (Board grid w _) =
@@ -83,9 +73,7 @@ play (p:ps) = do
       put boards'
       play ps
     Just b  ->
-      trace (show $ length boards') $ pure (True, p * (V.sum . V.map cellNum . unPicked $ b))
+      pure (True, p * (V.sum . V.map cellNum . unPicked $ b))
 
 part1Solution :: [Int] -> [Board] -> (Bool, Int)
 part1Solution picks = evalState (play picks)
-  -- let (r, s) = runState (play picks) boards
-  -- in trace (show $ filter hasWon s) $ r
