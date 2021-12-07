@@ -29,6 +29,22 @@ orthogonal (Line x1 y1 x2 y2)
     in S.fromList [ Vec2 (x, y1) | x <- [minx..maxx] ]
   | otherwise = S.empty
 
+cardinal :: Line -> Set Vec2
+cardinal (Line x1 y1 x2 y2)
+  | x1 == x2  =
+    let miny = min y1 y2
+        maxy = max y1 y2
+    in S.fromList [ Vec2 (x1, y) | y <- [miny..maxy] ]
+  | y1 == y2  =
+    let minx = min x1 x2
+        maxx = max x1 x2
+    in S.fromList [ Vec2 (x, y1) | x <- [minx..maxx] ]
+  | otherwise =
+    let (dx, dy) = (x1 - x2, y1 - y2)
+        (sx, sy) = (signum dx, signum dy)
+    in S.fromList
+       [ Vec2 (x2 + sx * i, y2 + sy * i) | i <- [0..abs dx]]
+
 intersections :: (Eq a, Ord a) => NonEmpty (Set a) -> Set a
 intersections (x :| xs) = go S.empty x xs
   where
@@ -42,3 +58,6 @@ intersections (x :| xs) = go S.empty x xs
 
 part1Solution :: NonEmpty Line -> Int
 part1Solution = S.size . intersections . fmap orthogonal
+
+part2Solution :: NonEmpty Line -> Int
+part2Solution = S.size . intersections . fmap cardinal

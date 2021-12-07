@@ -11,7 +11,7 @@ import Advent.Y2021.Day5.Hydro
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Part 1" $ do
+  describe "Advent - Y2021 - Part 1" $ do
     describe "orthogonal" $ do
       it "should project the set of Vec2 for 1,1 -> 1,3" $ do
         (orthogonal $ Line 1 1 1 3)
