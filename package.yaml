@@ -81,5 +81,6 @@ tests:
     - attoparsec
     - containers
     - hspec
+    - QuickCheck
     - text
     - vector

@@ -9,7 +9,7 @@ import Advent.Y2021.Day4.Parse
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Part 2" $ do
+  describe "Advent - Y2021 - Part 2" $ do
     it "should solve the example input" $ do
       raw <- T.readFile "test/Advent/Y2021/Day4/example.txt"
       case A.parseOnly parseInput raw of
