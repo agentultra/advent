@@ -6,7 +6,7 @@ import Data.Set (Set)
 import qualified Data.Set as S
 
 newtype Vec2 = Vec2 { getVec2 :: (Int, Int) }
-  deriving (Eq, Hashable, Ord, Show)
+  deriving (Eq, Ord, Show)
 
 data Line
   = Line
