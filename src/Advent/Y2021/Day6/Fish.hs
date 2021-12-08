@@ -15,5 +15,15 @@ runFishes :: Int -> Vector Int -> Vector Int
 runFishes 0 fishes = fishes
 runFishes n fishes = runFishes (n - 1) . nextState $ fishes
 
+runFishes' :: Int -> [Int] -> Int
+runFishes' n fishes = go n 0 fishes
+  where
+    go :: Int -> Int -> [Int] -> Int
+    go 0 size _  = size
+    go n size fs = _
+
 part1Solution :: Vector Int -> Int
 part1Solution = V.length . runFishes 80
+
+part2Solution :: Vector Int -> Int
+part2Solution = V.length . runFishes 256
