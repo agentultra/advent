@@ -8,7 +8,7 @@ import Advent.Y2021.Day6.Part1
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Day 6 - Part 1" $ do
+  describe "Advent - Y2021 - Day 6 - Part 1" $ do
     describe "next" $ do
       context "where there are no 0" $ do
         it "should decrement fish" $ do
@@ -28,3 +28,9 @@ spec = do
     describe "part1Solution" $ do
       it "should solve for the example" $ do
         (part1Solution . V.fromList $ [3, 4, 3, 1, 2]) `shouldBe` 5934
+
+    describe "runFishes'" $ do
+      it "should get the same answer as part1Solution on the example" $ do
+        (runFishes' 80 [3, 4, 3, 1, 2])
+          `shouldBe`
+          (part1Solution . V.fromList $ [3, 4, 3, 1, 2])
