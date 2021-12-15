@@ -24,7 +24,9 @@ segmentP = do
     _   -> fail "Invalid segment"
 
 digitP :: Parser Digit
-digitP = Digit <$> A.many1' segmentP
+digitP = do
+  ss <- S.fromList <$> A.many1' segmentP
+  pure $ Digit ss
 
 displayP :: Parser Display
 displayP = do

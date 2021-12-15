@@ -2,6 +2,7 @@ module Prelude
   ( module Relude
   , module Relude.Extra.Enum
   , eitherToMaybe
+  , lookupKey
   , maybeTrue
   , pairs
   , readDecimals
@@ -19,7 +20,7 @@ import Relude.Extra.Enum
 
 -- | Read a comma-separated list of values
 readValuesAs :: T.Reader a -> Text -> Either String [a]
-readValuesAs reader txt = map fst <$> traverse reader (T.split (== ',') txt)
+readValuesAs rdr txt = map fst <$> traverse rdr (T.split (== ',') txt)
 
 -- | Parse a comma-separated list of @Int@
 readDecimals :: Text -> Either String [Int]
@@ -58,9 +59,16 @@ pairs xs
     go :: [a] -> [(a, a)]
     go [] = []
     go [_] = []
-    go (x:y:xs) = (x, y) : go xs
+    go (x:y:xs') = (x, y) : go xs'
 
 maybeTrue :: (a -> Bool) -> a -> Maybe a
 maybeTrue p x
   | p x       = Just x
   | otherwise = Nothing
+
+-- | Like 'Data.List.lookup' but find the key based on the value
+lookupKey :: Eq a => a -> [(b, a)] -> Maybe b
+lookupKey _ [] = Nothing
+lookupKey k (x:xs)
+  | k == snd x = Just $ fst x
+  | otherwise  = lookupKey k xs

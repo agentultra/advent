@@ -1,4 +1,13 @@
 module Advent.Y2021.Day8.Part2 where
 
+import qualified Data.Text.IO as T
+
+import Advent.Y2021.Day8.Digits
+import Advent.Y2021.Day8.Parse
+
 solution :: IO ()
-solution = putStrLn "Not implemented yet"
+solution = do
+  raw <- T.readFile "data/2021/Day8.txt"
+  case parseInput raw of
+    Left err -> print err
+    Right ds -> print $ part2Solution $ fromList ds
