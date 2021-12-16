@@ -9,7 +9,7 @@ import qualified Data.Text.IO as T
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Day 8 - Part 1" $ do
+  describe "Advent - Y2021 - Day 8 - Part 1" $ do
     describe "part1Solution" $ do
       it "should calculate the right number from the first line of the example" $ do
         let Right ds = fromList

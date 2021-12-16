@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5003f6de7f9831e02d821850f13f7d069cddab4b2ba945096592826a641ce7ce
+-- hash: fb57bdac6d3bb8d5734961cf2dcbb1ce08602d0e04c6443aea82a6fe7f2f7aa9
 
 name:           advent
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Advent.Grid
       Advent.Input
       Advent.List
       Advent.Parse.Utils
@@ -164,6 +165,7 @@ library
       Advent.Y2021.Day8.Part2
       Advent.Y2021.Day9.Part1
       Advent.Y2021.Day9.Part2
+      Advent.Y2021.Day9.Vents
       Prelude
   other-modules:
       Paths_advent
@@ -231,6 +233,7 @@ test-suite advent-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Advent.GridSpec
       Advent.Y2020.Day1.Part1Spec
       Advent.Y2020.Day1.Part2Spec
       Advent.Y2020.Day10.Part1Spec

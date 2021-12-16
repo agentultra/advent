@@ -11,7 +11,7 @@ import qualified Data.Text.IO as T
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Day 8 - Part 2" $ do
+  describe "Advent - Y2021 - Day 8 - Part 2" $ do
     describe "deduceDigits" $ do
       context "given the example signal pattern" $ do
         it "should deduce the digit map" $ do
