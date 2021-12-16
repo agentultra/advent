@@ -22,11 +22,15 @@ mkGrid ps = do
     let b = V.fromList $ concat ps
     pure $ Grid w h b
 
-gridRows :: Grid a -> [Vector a]
-gridRows (Grid w _ cells) =
+rows :: Grid a -> [Vector a]
+rows (Grid w _ cells) =
   [ V.slice i w cells | i <- [0,w..(length cells - w)] ]
 
-gridCols :: Grid a -> [Vector a]
-gridCols (Grid w _ cells) =
-  let rows = chunksOf w . V.toList $ cells
-  in map V.fromList . transpose $ rows
+cols :: Grid a -> [Vector a]
+cols (Grid w _ cells) =
+  let rs = chunksOf w . V.toList $ cells
+  in map V.fromList . transpose $ rs
+
+-- | Return a value within the bounds of the Grid
+get :: Grid a -> Int -> Int -> Maybe a
+get (Grid w _ cells) x y = cells V.!? (y * w + x)
