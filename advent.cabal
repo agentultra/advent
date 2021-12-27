@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d08133fba77194f786ed7e03224e4fe45c2703002720942331ac4f39f2fa0fe2
+-- hash: e5f992775973ea8f3d25dfa9bb3846e205d3744953888565b28adbb8f2cbdc97
 
 name:           advent
 version:        0.1.0.0
@@ -178,6 +178,7 @@ library
       OverloadedStrings
       RecordWildCards
       StandaloneDeriving
+      TupleSections
       TypeApplications
   build-depends:
       attoparsec
@@ -204,6 +205,7 @@ executable advent2020
       OverloadedStrings
       RecordWildCards
       StandaloneDeriving
+      TupleSections
       TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2020.Main
   build-depends:
@@ -223,6 +225,7 @@ executable advent2021
       OverloadedStrings
       RecordWildCards
       StandaloneDeriving
+      TupleSections
       TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2021.Main
   build-depends:
@@ -344,6 +347,7 @@ test-suite advent-test
       OverloadedStrings
       RecordWildCards
       StandaloneDeriving
+      TupleSections
       TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:

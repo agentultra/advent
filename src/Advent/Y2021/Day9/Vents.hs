@@ -8,59 +8,46 @@ import Advent.Grid (Grid (..))
 import qualified Advent.Grid as G
 
 type CaveFloor = Grid Int
+type Point = (Int, Int)
 
-floorNeighbours :: CaveFloor -> Int -> Int -> [Int]
-floorNeighbours flr x = mapMaybe (uncurry (G.get flr)) . neighbours x
+floorNeighbours :: CaveFloor -> Point -> [(Point, Int)]
+floorNeighbours flr = mapMaybe (\p -> (p,) <$> uncurry (G.get flr) p) . neighbours flr
 
-neighbours :: Int -> Int -> [(Int, Int)]
-neighbours x y = [ (x-1, y)
-                 , (x, y - 1)
-                 , (x+1, y)
-                 , (x, y+1)
-                 ]
+neighbours :: CaveFloor -> Point -> [Point]
+neighbours (Grid w h _) (x, y) = filter inBounds coords
+  where
+    inBounds (x', y') =
+      x' >= 0 && x' < w && y' >= 0 && y' < h
+    coords = [ (x-1, y)
+             , (x, y - 1)
+             , (x+1, y)
+             , (x, y+1)
+             ]
 
-lowPoints :: CaveFloor -> [(Int, Int)]
+lowPoints :: CaveFloor -> [Point]
 lowPoints flr@(Grid w h _) = do
   x <- [0..w-1]
   y <- [0..h-1]
   case G.get flr x y of
     Nothing -> error $ T.pack "WAT"
     Just c ->
-      if all (> c) $ floorNeighbours flr x y
+      if all ((> c) . snd) $ floorNeighbours flr (x, y)
       then pure (x, y)
       else []
 
--- low point: (basin size, frontier points)
-type BasinMap = Map (Int, Int) (Int, [(Int, Int)])
+basinNeighbours :: CaveFloor -> Point -> [Point]
+basinNeighbours flr = map fst . filter ((< 9) . snd) . floorNeighbours flr
 
-basins :: CaveFloor -> [Int]
-basins flr = map fst . M.elems . go . initBasins $ flr
+basin :: CaveFloor -> Point -> Int
+basin flr pos = go 1 (S.singleton pos) (basinNeighbours flr pos)
   where
-    initBasins :: CaveFloor -> BasinMap
-    initBasins
-      = M.fromList
-      . map (\x -> (x, (1, [x])))
-      . lowPoints
-
-    go :: BasinMap -> BasinMap
-    go basinMap
-      | allEmptyFrontiers basinMap = basinMap
-      | otherwise                  = go $ M.map updateFrontier basinMap
-
-    updateFrontier :: (Int, [(Int, Int)]) -> (Int, [(Int, Int)])
-    updateFrontier (basinSize, [])     = (basinSize, [])
-    updateFrontier (basinSize, (x:xs)) =
-      let bs = basinNeighbours x
-      in (basinSize + length bs, bs ++ xs)
-
-    basinNeighbours :: (Int, Int) -> [(Int, Int)]
-    basinNeighbours (x, y)
-      = map fst
-      . filter ((< 9) . snd)
-      . zip (neighbours x y) $ floorNeighbours flr x y
-
-    allEmptyFrontiers :: BasinMap -> Bool
-    allEmptyFrontiers = all (null . snd) . M.elems
+    go :: Int -> Set Point -> [Point] -> Int
+    go size _ [] = size
+    go size visited (p:frontier) =
+      if p `S.member` visited
+      then go size visited frontier
+      else let ns = filter (not . (`S.member` visited)) . basinNeighbours flr $ p
+           in go (size + 1) (p `S.insert` visited) (ns ++ frontier)
 
 part1Solution :: NonEmpty (NonEmpty Int) -> Int
 part1Solution xs = case G.mkGrid . map toList . toList $ xs of
@@ -70,6 +57,6 @@ part1Solution xs = case G.mkGrid . map toList . toList $ xs of
 part2Solution :: NonEmpty (NonEmpty Int) -> Int
 part2Solution xs = case G.mkGrid . map toList . toList $ xs of
   Nothing -> error $ T.pack "Bad Input"
-  Just g  -> multiply . take 3 . reverse . sort . basins $ g
+  Just g  -> multiply . take 3 . reverse . sort . map (basin g) . lowPoints $ g
   where
     multiply = foldl' (*) 1
