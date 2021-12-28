@@ -7,7 +7,7 @@ import Advent.Y2021.Day9.Vents
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2021 - Day 9 - Part 2" $ do
+  describe "Advent - Y2021 - Day 9 - Part 2" $ do
     describe "basinNeighbours" $ do
       it "should return the orthogonal points whose map value is < 9" $ do
         let (Just g) = G.mkGrid exampleCave

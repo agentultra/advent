@@ -11,7 +11,7 @@ spec = do
     describe "lowPoints" $ do
       it "should find the low points from the example" $ do
         let (Just cave) = G.mkGrid exampleCave
-        sort (lowPoints cave) `shouldBe` [(9, 0)]
+        sort (lowPoints cave) `shouldBe` sort [(9, 0), (1, 0), (2, 2), (6, 4)]
 
 exampleCave :: [[Int]]
 exampleCave =
