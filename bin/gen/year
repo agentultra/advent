@@ -8,61 +8,61 @@ do
     ./bin/gen/day ${YEAR} ${i} 2
 done
 
-mkdir -p ./app/${YEAR}/
+mkdir -p ./app/Y${YEAR}/
 
-cat >./app/${YEAR}/Main.hs <<EOF
-module ${YEAR}.Main where
+cat >./app/Y${YEAR}/Main.hs <<EOF
+module Y${YEAR}.Main where
 
-import qualified Advent.${YEAR}.Day1.Part1 as D1P1
-import qualified Advent.${YEAR}.Day1.Part2 as D1P2
-import qualified Advent.${YEAR}.Day2.Part1 as D2P1
-import qualified Advent.${YEAR}.Day2.Part2 as D2P2
-import qualified Advent.${YEAR}.Day3.Part1 as D3P1
-import qualified Advent.${YEAR}.Day3.Part2 as D3P2
-import qualified Advent.${YEAR}.Day4.Part1 as D4P1
-import qualified Advent.${YEAR}.Day4.Part2 as D4P2
-import qualified Advent.${YEAR}.Day5.Part1 as D5P1
-import qualified Advent.${YEAR}.Day5.Part2 as D5P2
-import qualified Advent.${YEAR}.Day6.Part1 as D6P1
-import qualified Advent.${YEAR}.Day6.Part2 as D6P2
-import qualified Advent.${YEAR}.Day7.Part1 as D7P1
-import qualified Advent.${YEAR}.Day7.Part2 as D7P2
-import qualified Advent.${YEAR}.Day8.Part1 as D8P1
-import qualified Advent.${YEAR}.Day8.Part2 as D8P2
-import qualified Advent.${YEAR}.Day9.Part1 as D9P1
-import qualified Advent.${YEAR}.Day9.Part2 as D9P2
-import qualified Advent.${YEAR}.Day10.Part1 as D10P1
-import qualified Advent.${YEAR}.Day10.Part2 as D10P2
-import qualified Advent.${YEAR}.Day11.Part1 as D11P1
-import qualified Advent.${YEAR}.Day11.Part2 as D11P2
-import qualified Advent.${YEAR}.Day12.Part1 as D12P1
-import qualified Advent.${YEAR}.Day12.Part2 as D12P2
-import qualified Advent.${YEAR}.Day13.Part1 as D13P1
-import qualified Advent.${YEAR}.Day13.Part2 as D13P2
-import qualified Advent.${YEAR}.Day14.Part1 as D14P1
-import qualified Advent.${YEAR}.Day14.Part2 as D14P2
-import qualified Advent.${YEAR}.Day15.Part1 as D15P1
-import qualified Advent.${YEAR}.Day15.Part2 as D15P2
-import qualified Advent.${YEAR}.Day16.Part1 as D16P1
-import qualified Advent.${YEAR}.Day16.Part2 as D16P2
-import qualified Advent.${YEAR}.Day17.Part1 as D17P1
-import qualified Advent.${YEAR}.Day17.Part2 as D17P2
-import qualified Advent.${YEAR}.Day18.Part1 as D18P1
-import qualified Advent.${YEAR}.Day18.Part2 as D18P2
-import qualified Advent.${YEAR}.Day19.Part1 as D19P1
-import qualified Advent.${YEAR}.Day19.Part2 as D19P2
-import qualified Advent.${YEAR}.Day20.Part1 as D20P1
-import qualified Advent.${YEAR}.Day20.Part2 as D20P2
-import qualified Advent.${YEAR}.Day21.Part1 as D21P1
-import qualified Advent.${YEAR}.Day21.Part2 as D21P2
-import qualified Advent.${YEAR}.Day22.Part1 as D22P1
-import qualified Advent.${YEAR}.Day22.Part2 as D22P2
-import qualified Advent.${YEAR}.Day23.Part1 as D23P1
-import qualified Advent.${YEAR}.Day23.Part2 as D23P2
-import qualified Advent.${YEAR}.Day24.Part1 as D24P1
-import qualified Advent.${YEAR}.Day24.Part2 as D24P2
-import qualified Advent.${YEAR}.Day25.Part1 as D25P1
-import qualified Advent.${YEAR}.Day25.Part2 as D25P2
+import qualified Advent.Y${YEAR}.Day1.Part1 as D1P1
+import qualified Advent.Y${YEAR}.Day1.Part2 as D1P2
+import qualified Advent.Y${YEAR}.Day2.Part1 as D2P1
+import qualified Advent.Y${YEAR}.Day2.Part2 as D2P2
+import qualified Advent.Y${YEAR}.Day3.Part1 as D3P1
+import qualified Advent.Y${YEAR}.Day3.Part2 as D3P2
+import qualified Advent.Y${YEAR}.Day4.Part1 as D4P1
+import qualified Advent.Y${YEAR}.Day4.Part2 as D4P2
+import qualified Advent.Y${YEAR}.Day5.Part1 as D5P1
+import qualified Advent.Y${YEAR}.Day5.Part2 as D5P2
+import qualified Advent.Y${YEAR}.Day6.Part1 as D6P1
+import qualified Advent.Y${YEAR}.Day6.Part2 as D6P2
+import qualified Advent.Y${YEAR}.Day7.Part1 as D7P1
+import qualified Advent.Y${YEAR}.Day7.Part2 as D7P2
+import qualified Advent.Y${YEAR}.Day8.Part1 as D8P1
+import qualified Advent.Y${YEAR}.Day8.Part2 as D8P2
+import qualified Advent.Y${YEAR}.Day9.Part1 as D9P1
+import qualified Advent.Y${YEAR}.Day9.Part2 as D9P2
+import qualified Advent.Y${YEAR}.Day10.Part1 as D10P1
+import qualified Advent.Y${YEAR}.Day10.Part2 as D10P2
+import qualified Advent.Y${YEAR}.Day11.Part1 as D11P1
+import qualified Advent.Y${YEAR}.Day11.Part2 as D11P2
+import qualified Advent.Y${YEAR}.Day12.Part1 as D12P1
+import qualified Advent.Y${YEAR}.Day12.Part2 as D12P2
+import qualified Advent.Y${YEAR}.Day13.Part1 as D13P1
+import qualified Advent.Y${YEAR}.Day13.Part2 as D13P2
+import qualified Advent.Y${YEAR}.Day14.Part1 as D14P1
+import qualified Advent.Y${YEAR}.Day14.Part2 as D14P2
+import qualified Advent.Y${YEAR}.Day15.Part1 as D15P1
+import qualified Advent.Y${YEAR}.Day15.Part2 as D15P2
+import qualified Advent.Y${YEAR}.Day16.Part1 as D16P1
+import qualified Advent.Y${YEAR}.Day16.Part2 as D16P2
+import qualified Advent.Y${YEAR}.Day17.Part1 as D17P1
+import qualified Advent.Y${YEAR}.Day17.Part2 as D17P2
+import qualified Advent.Y${YEAR}.Day18.Part1 as D18P1
+import qualified Advent.Y${YEAR}.Day18.Part2 as D18P2
+import qualified Advent.Y${YEAR}.Day19.Part1 as D19P1
+import qualified Advent.Y${YEAR}.Day19.Part2 as D19P2
+import qualified Advent.Y${YEAR}.Day20.Part1 as D20P1
+import qualified Advent.Y${YEAR}.Day20.Part2 as D20P2
+import qualified Advent.Y${YEAR}.Day21.Part1 as D21P1
+import qualified Advent.Y${YEAR}.Day21.Part2 as D21P2
+import qualified Advent.Y${YEAR}.Day22.Part1 as D22P1
+import qualified Advent.Y${YEAR}.Day22.Part2 as D22P2
+import qualified Advent.Y${YEAR}.Day23.Part1 as D23P1
+import qualified Advent.Y${YEAR}.Day23.Part2 as D23P2
+import qualified Advent.Y${YEAR}.Day24.Part1 as D24P1
+import qualified Advent.Y${YEAR}.Day24.Part2 as D24P2
+import qualified Advent.Y${YEAR}.Day25.Part1 as D25P1
+import qualified Advent.Y${YEAR}.Day25.Part2 as D25P2
 
 main :: IO ()
 main = do
