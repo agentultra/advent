@@ -12,3 +12,9 @@ readCalories = map (map reallyReadInt) . groupBy (\a b -> a /= "" && b /= "") . 
     reallyReadInt txt = case readInt txt of
       Left _  -> 0
       Right x -> x
+
+totalCalories :: [[Int]] -> [Int]
+totalCalories = map sum
+
+maxCalories :: [[Int]] -> [Int]
+maxCalories = sortBy (flip compare) . totalCalories

@@ -4,9 +4,6 @@ import qualified Data.Text.IO as T
 
 import Advent.Y2022.Day1.Elves
 
-maxCalories :: [[Int]] -> [Int]
-maxCalories = sortBy (flip compare) . map sum
-
 solution :: IO ()
 solution = do
   raw <- T.readFile "data/2022/Day1.txt"
