@@ -1,6 +1,7 @@
 module Prelude
   ( module Relude
   , module Relude.Extra.Enum
+  , chunks
   , eitherToMaybe
   , lookupKey
   , maybeTrue
@@ -72,3 +73,6 @@ lookupKey _ [] = Nothing
 lookupKey k (x:xs)
   | k == snd x = Just $ fst x
   | otherwise  = lookupKey k xs
+
+chunks :: Int -> [a] -> [[a]]
+chunks n = takeWhile (not . null) . unfoldr (Just . splitAt n)
