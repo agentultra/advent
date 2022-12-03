@@ -20,17 +20,3 @@ solution = do
       Throw
       (parseOpponentShape . T.head $ txt)
       (parseChallengerShape . T.last $ txt)
-
-    parseOpponentShape :: Char -> Shape
-    parseOpponentShape = \case
-      'A' -> Rock
-      'B' -> Paper
-      'C' -> Scissors
-      _   -> error "Invalid input"
-
-    parseChallengerShape :: Char -> Shape
-    parseChallengerShape = \case
-      'X' -> Rock
-      'Y' -> Paper
-      'Z' -> Scissors
-      _   -> error "Invalid input"

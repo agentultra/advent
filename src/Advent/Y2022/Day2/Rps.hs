@@ -1,4 +1,5 @@
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Advent.Y2022.Day2.Rps where
 
@@ -14,6 +15,20 @@ shapeScore = \case
   Paper    -> 2
   Scissors -> 3
 
+parseOpponentShape :: Char -> Shape
+parseOpponentShape = \case
+  'A' -> Rock
+  'B' -> Paper
+  'C' -> Scissors
+  _   -> error "Invalid input"
+
+parseChallengerShape :: Char -> Shape
+parseChallengerShape = \case
+  'X' -> Rock
+  'Y' -> Paper
+  'Z' -> Scissors
+  _   -> error "Invalid input"
+
 data Result = Win | Lose | Draw  deriving (Eq, Show)
 
 resultScore :: Result -> Int
@@ -21,6 +36,13 @@ resultScore = \case
   Win  -> 6
   Lose -> 0
   Draw -> 3
+
+parseExpectedResult :: Char -> Result
+parseExpectedResult = \case
+  'X' -> Lose
+  'Y' -> Draw
+  'Z' -> Win
+  _   -> error "Invalid input"
 
 data Throw
   = Throw
