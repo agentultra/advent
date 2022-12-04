@@ -2,11 +2,11 @@ module Advent.Y2022.Day1.Part1Spec where
 
 import Test.Hspec
 
-import Advent.Y2022.Day1.Part1
+import Advent.Y2022.Day1.Elves
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - 2022 - Part 1" $ do
+  describe "Advent - 2022 - Part 1" $ do
     it "should return maximum sum of calories" $ do
       let example = [ [1000, 2000, 3000]
                     , [4000]
@@ -16,4 +16,4 @@ spec = do
                     ]
           expected = 24000
 
-      maximumCalories example `shouldBe` expected
+      (take 1 . maxCalories $ example) `shouldBe` [expected]
