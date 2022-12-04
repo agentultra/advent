@@ -8,7 +8,7 @@ import Test.QuickCheck
 
 import Advent.Y2022.Day4.Interval
 
-instance (Arbitrary a, Num a) => Arbitrary (Interval a) where
+instance Arbitrary Interval where
   arbitrary = do
     x <- arbitrary
     y <- abs <$> arbitrary
@@ -17,5 +17,5 @@ instance (Arbitrary a, Num a) => Arbitrary (Interval a) where
 spec :: Spec
 spec = do
   describe "overlaps" $ do
-    prop "commutative" $ \(i1 :: Interval Int) i2 ->
+    prop "commutative" $ \i1 i2 ->
       (i1 `overlaps` i2) `shouldBe` (i2 `overlaps` i1)

@@ -11,7 +11,7 @@ solution = do
   let s = foldl' countContained 0 . map parseIntervals . T.lines $ raw
   print s
   where
-    countContained :: Int -> (Interval Int, Interval Int) -> Int
+    countContained :: Int -> (Interval, Interval) -> Int
     countContained c (intervalA, intervalB)
       | intervalA `contains` intervalB || intervalB `contains` intervalA = c + 1
       | otherwise = c

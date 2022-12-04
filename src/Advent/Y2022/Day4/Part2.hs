@@ -11,7 +11,7 @@ solution = do
   let s = foldl' countOverlaps 0 . map parseIntervals . T.lines $ raw
   print s
   where
-    countOverlaps :: Int -> (Interval Int, Interval Int) -> Int
+    countOverlaps :: Int -> (Interval, Interval) -> Int
     countOverlaps c (intervalA, intervalB)
       | intervalA `overlaps` intervalB = c + 1
       | otherwise = c
