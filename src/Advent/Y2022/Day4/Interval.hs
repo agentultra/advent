@@ -29,4 +29,4 @@ contains :: Interval -> Interval -> Bool
 contains (Interval x y) (Interval a b) = x <= a && y >= b
 
 overlaps :: Interval -> Interval -> Bool
-overlaps (Interval x y) (Interval a b) = a <= y && a >= x || x <= b && x >= a
+overlaps (Interval x y) (Interval a b) = x <= b && a <= y
