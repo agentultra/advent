@@ -11,9 +11,11 @@ module Prelude
   , readSignedDecimals
   , readRationals
   , readDoubles
+  , windows
   )
   where
 
+import Control.Applicative
 import qualified Data.Text as T
 import qualified Data.Text.Read as T
 import Relude
@@ -76,3 +78,11 @@ lookupKey k (x:xs)
 
 chunks :: Int -> [a] -> [[a]]
 chunks n = takeWhile (not . null) . unfoldr (Just . splitAt n)
+
+-- | Like 'transpose' from Data.List except this will discard elements
+-- less than 'n'.
+transpose' :: [[a]] -> [[a]]
+transpose' = getZipList . traverse ZipList
+
+windows :: Int -> [a] -> [[a]]
+windows n = transpose' . take n . tails

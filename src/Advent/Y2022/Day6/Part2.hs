@@ -1,4 +1,12 @@
 module Advent.Y2022.Day6.Part2 where
 
+import qualified Data.Text.IO as T
+
+import Advent.Y2022.Day6.Signal
+
 solution :: IO ()
-solution = putStrLn "Not implemented yet"
+solution = do
+  raw <- T.readFile "data/2022/Day6.txt"
+  case findPacketMarkerIndex 14 raw of
+    Nothing -> putStrLn "No solution found!"
+    Just ix -> print ix
