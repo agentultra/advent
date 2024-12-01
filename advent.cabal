@@ -1,10 +1,10 @@
-cabal-version: 1.12
+cabal-version: 2.0
 
--- This file has been generated from package.yaml by hpack version 0.35.0.
+-- This file has been generated from package.yaml by hpack version 0.37.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ba382db727351c04c2e1e6cd8ab52c38fb7bec8d19ea67d8f2f2db000ceb4c89
+-- hash: 14dc41dc1c05bc250192c097871a5b544513c7cc03f2175d4872446438c7ee95
 
 name:           advent
 version:        0.1.0.0
@@ -226,6 +226,8 @@ library
       Prelude
   other-modules:
       Paths_advent
+  autogen-modules:
+      Paths_advent
   hs-source-dirs:
       src
   default-extensions:
@@ -238,7 +240,7 @@ library
       TypeApplications
   build-depends:
       attoparsec
-    , base-noprelude >=4.12 && <5
+    , base >=4.18 && <5
     , bytestring
     , containers
     , errors
@@ -247,11 +249,15 @@ library
     , text
     , unordered-containers
     , vector
+  mixins:
+      base hiding (Prelude)
   default-language: Haskell2010
 
 executable advent2020
   main-is: Main.hs
   other-modules:
+      Paths_advent
+  autogen-modules:
       Paths_advent
   hs-source-dirs:
       app/Y2020/
@@ -266,12 +272,16 @@ executable advent2020
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2020.Main
   build-depends:
       advent
-    , base-noprelude >=4.12 && <5
+    , base >=4.18 && <5
+  mixins:
+      base hiding (Prelude)
   default-language: Haskell2010
 
 executable advent2021
   main-is: Main.hs
   other-modules:
+      Paths_advent
+  autogen-modules:
       Paths_advent
   hs-source-dirs:
       app/Y2021/
@@ -286,12 +296,16 @@ executable advent2021
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2021.Main
   build-depends:
       advent
-    , base-noprelude >=4.12 && <5
+    , base >=4.18 && <5
+  mixins:
+      base hiding (Prelude)
   default-language: Haskell2010
 
 executable advent2022
   main-is: Main.hs
   other-modules:
+      Paths_advent
+  autogen-modules:
       Paths_advent
   hs-source-dirs:
       app/Y2022/
@@ -306,7 +320,9 @@ executable advent2022
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2022.Main
   build-depends:
       advent
-    , base-noprelude >=4.12 && <5
+    , base >=4.18 && <5
+  mixins:
+      base hiding (Prelude)
   default-language: Haskell2010
 
 test-suite advent-test
@@ -465,6 +481,8 @@ test-suite advent-test
       Advent.Y2022.Day9.Part1Spec
       Advent.Y2022.Day9.Part2Spec
       Paths_advent
+  autogen-modules:
+      Paths_advent
   hs-source-dirs:
       test
   default-extensions:
@@ -480,10 +498,12 @@ test-suite advent-test
       QuickCheck
     , advent
     , attoparsec
-    , base-noprelude >=4.12 && <5
+    , base >=4.18 && <5
     , containers
     , hspec
     , text
     , unordered-containers
     , vector
+  mixins:
+      base hiding (Prelude)
   default-language: Haskell2010
