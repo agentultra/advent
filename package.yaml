@@ -88,6 +88,19 @@ executables:
     - name: advent
       mixins:
         - (Prelude as Prelude)
+  advent2024:
+    main:                Main.hs
+    source-dirs:         app/Y2022/
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -main-is Y2022.Main
+    dependencies:
+    - name: advent
+      mixins:
+        - (Prelude as Prelude)
 
 tests:
   advent-test:
