@@ -60,8 +60,6 @@ executables:
     - -main-is Y2020.Main
     dependencies:
     - name: advent
-      mixins:
-        - (Prelude as Prelude)
   advent2021:
     main:                Main.hs
     source-dirs:         app/Y2021/
@@ -73,8 +71,6 @@ executables:
     - -main-is Y2021.Main
     dependencies:
     - name: advent
-      mixins:
-        - (Prelude as Prelude)
   advent2022:
     main:                Main.hs
     source-dirs:         app/Y2022/
@@ -86,21 +82,17 @@ executables:
     - -main-is Y2022.Main
     dependencies:
     - name: advent
-      mixins:
-        - (Prelude as Prelude)
   advent2024:
     main:                Main.hs
-    source-dirs:         app/Y2022/
+    source-dirs:         app/Y2024/
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     - -Wall
-    - -main-is Y2022.Main
+    - -main-is Y2024.Main
     dependencies:
     - name: advent
-      mixins:
-        - (Prelude as Prelude)
 
 tests:
   advent-test:

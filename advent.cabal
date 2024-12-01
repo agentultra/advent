@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 14dc41dc1c05bc250192c097871a5b544513c7cc03f2175d4872446438c7ee95
+-- hash: 6cf27fe43db0a7213d2f048848576cc4b10fb2fbe2df9baec0c61d2bd67f41e8
 
 name:           advent
 version:        0.1.0.0
@@ -223,6 +223,56 @@ library
       Advent.Y2022.Day8.Part2
       Advent.Y2022.Day9.Part1
       Advent.Y2022.Day9.Part2
+      Advent.Y2024.Day1.Part1
+      Advent.Y2024.Day1.Part2
+      Advent.Y2024.Day10.Part1
+      Advent.Y2024.Day10.Part2
+      Advent.Y2024.Day11.Part1
+      Advent.Y2024.Day11.Part2
+      Advent.Y2024.Day12.Part1
+      Advent.Y2024.Day12.Part2
+      Advent.Y2024.Day13.Part1
+      Advent.Y2024.Day13.Part2
+      Advent.Y2024.Day14.Part1
+      Advent.Y2024.Day14.Part2
+      Advent.Y2024.Day15.Part1
+      Advent.Y2024.Day15.Part2
+      Advent.Y2024.Day16.Part1
+      Advent.Y2024.Day16.Part2
+      Advent.Y2024.Day17.Part1
+      Advent.Y2024.Day17.Part2
+      Advent.Y2024.Day18.Part1
+      Advent.Y2024.Day18.Part2
+      Advent.Y2024.Day19.Part1
+      Advent.Y2024.Day19.Part2
+      Advent.Y2024.Day2.Part1
+      Advent.Y2024.Day2.Part2
+      Advent.Y2024.Day20.Part1
+      Advent.Y2024.Day20.Part2
+      Advent.Y2024.Day21.Part1
+      Advent.Y2024.Day21.Part2
+      Advent.Y2024.Day22.Part1
+      Advent.Y2024.Day22.Part2
+      Advent.Y2024.Day23.Part1
+      Advent.Y2024.Day23.Part2
+      Advent.Y2024.Day24.Part1
+      Advent.Y2024.Day24.Part2
+      Advent.Y2024.Day25.Part1
+      Advent.Y2024.Day25.Part2
+      Advent.Y2024.Day3.Part1
+      Advent.Y2024.Day3.Part2
+      Advent.Y2024.Day4.Part1
+      Advent.Y2024.Day4.Part2
+      Advent.Y2024.Day5.Part1
+      Advent.Y2024.Day5.Part2
+      Advent.Y2024.Day6.Part1
+      Advent.Y2024.Day6.Part2
+      Advent.Y2024.Day7.Part1
+      Advent.Y2024.Day7.Part2
+      Advent.Y2024.Day8.Part1
+      Advent.Y2024.Day8.Part2
+      Advent.Y2024.Day9.Part1
+      Advent.Y2024.Day9.Part2
       Prelude
   other-modules:
       Paths_advent
@@ -318,6 +368,30 @@ executable advent2022
       TupleSections
       TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2022.Main
+  build-depends:
+      advent
+    , base >=4.18 && <5
+  mixins:
+      base hiding (Prelude)
+  default-language: Haskell2010
+
+executable advent2024
+  main-is: Main.hs
+  other-modules:
+      Paths_advent
+  autogen-modules:
+      Paths_advent
+  hs-source-dirs:
+      app/Y2024/
+  default-extensions:
+      GADTs
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      StandaloneDeriving
+      TupleSections
+      TypeApplications
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Y2024.Main
   build-depends:
       advent
     , base >=4.18 && <5
@@ -480,6 +554,56 @@ test-suite advent-test
       Advent.Y2022.Day8.Part2Spec
       Advent.Y2022.Day9.Part1Spec
       Advent.Y2022.Day9.Part2Spec
+      Advent.Y2024.Day1.Part1Spec
+      Advent.Y2024.Day1.Part2Spec
+      Advent.Y2024.Day10.Part1Spec
+      Advent.Y2024.Day10.Part2Spec
+      Advent.Y2024.Day11.Part1Spec
+      Advent.Y2024.Day11.Part2Spec
+      Advent.Y2024.Day12.Part1Spec
+      Advent.Y2024.Day12.Part2Spec
+      Advent.Y2024.Day13.Part1Spec
+      Advent.Y2024.Day13.Part2Spec
+      Advent.Y2024.Day14.Part1Spec
+      Advent.Y2024.Day14.Part2Spec
+      Advent.Y2024.Day15.Part1Spec
+      Advent.Y2024.Day15.Part2Spec
+      Advent.Y2024.Day16.Part1Spec
+      Advent.Y2024.Day16.Part2Spec
+      Advent.Y2024.Day17.Part1Spec
+      Advent.Y2024.Day17.Part2Spec
+      Advent.Y2024.Day18.Part1Spec
+      Advent.Y2024.Day18.Part2Spec
+      Advent.Y2024.Day19.Part1Spec
+      Advent.Y2024.Day19.Part2Spec
+      Advent.Y2024.Day2.Part1Spec
+      Advent.Y2024.Day2.Part2Spec
+      Advent.Y2024.Day20.Part1Spec
+      Advent.Y2024.Day20.Part2Spec
+      Advent.Y2024.Day21.Part1Spec
+      Advent.Y2024.Day21.Part2Spec
+      Advent.Y2024.Day22.Part1Spec
+      Advent.Y2024.Day22.Part2Spec
+      Advent.Y2024.Day23.Part1Spec
+      Advent.Y2024.Day23.Part2Spec
+      Advent.Y2024.Day24.Part1Spec
+      Advent.Y2024.Day24.Part2Spec
+      Advent.Y2024.Day25.Part1Spec
+      Advent.Y2024.Day25.Part2Spec
+      Advent.Y2024.Day3.Part1Spec
+      Advent.Y2024.Day3.Part2Spec
+      Advent.Y2024.Day4.Part1Spec
+      Advent.Y2024.Day4.Part2Spec
+      Advent.Y2024.Day5.Part1Spec
+      Advent.Y2024.Day5.Part2Spec
+      Advent.Y2024.Day6.Part1Spec
+      Advent.Y2024.Day6.Part2Spec
+      Advent.Y2024.Day7.Part1Spec
+      Advent.Y2024.Day7.Part2Spec
+      Advent.Y2024.Day8.Part1Spec
+      Advent.Y2024.Day8.Part2Spec
+      Advent.Y2024.Day9.Part1Spec
+      Advent.Y2024.Day9.Part2Spec
       Paths_advent
   autogen-modules:
       Paths_advent
