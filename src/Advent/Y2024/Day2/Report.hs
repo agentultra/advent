@@ -49,16 +49,16 @@ isUnsafe = \case
   Safe   -> False
   Unsafe -> True
 
+toResult :: Bool -> Result
+toResult = \case
+  True  -> Safe
+  False -> Unsafe
+
 result :: Report -> Result
 result = checkSafe . reportDelta
   where
     checkSafe :: [Delta] -> Result
     checkSafe deltas = toResult $ allChanges deltas && allWithinTolerance deltas
-
-    toResult :: Bool -> Result
-    toResult = \case
-      True  -> Safe
-      False -> Unsafe
 
 allChanges :: [Delta] -> Bool
 allChanges deltas = all isIncrease deltas || all isDecrease deltas
@@ -84,8 +84,3 @@ allWithinTolerance = all withinTolerance
 
 dampenResult :: Report -> Result
 dampenResult = toResult . any (isSafe . result) . subset
-  where
-    toResult :: Bool -> Result
-    toResult = \case
-      True  -> Safe
-      False -> Unsafe
