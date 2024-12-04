@@ -7,6 +7,6 @@ import qualified Data.Text.IO as T
 solution :: IO ()
 solution = do
   raw <- T.readFile "data/2024/Day3.txt"
-  let instrs = getInput raw
-      answer = sum . map eval <$> instrs
+  let instrs = getDay1Input raw
+      answer = eval <$> instrs
   print answer
