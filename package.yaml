@@ -43,6 +43,7 @@ library:
   - containers
   - errors
   - relude
+  - replace-attoparsec
   - split
   - text
   - unordered-containers

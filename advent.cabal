@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1e49dc5c87afd5734eda3cd936eb706a12edb72d86f12422f62f22ce172b601b
+-- hash: f7c766cd6c037408af365c4d35b55dafc2542dd044b4c3e7f58fffac92ca536d
 
 name:           advent
 version:        0.1.0.0
@@ -262,6 +262,8 @@ library
       Advent.Y2024.Day24.Part2
       Advent.Y2024.Day25.Part1
       Advent.Y2024.Day25.Part2
+      Advent.Y2024.Day3.Input
+      Advent.Y2024.Day3.Instruction
       Advent.Y2024.Day3.Part1
       Advent.Y2024.Day3.Part2
       Advent.Y2024.Day4.Part1
@@ -298,6 +300,7 @@ library
     , containers
     , errors
     , relude
+    , replace-attoparsec
     , split
     , text
     , unordered-containers
