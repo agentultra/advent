@@ -4,6 +4,7 @@ import Test.Hspec
 
 import Advent.Grid
 import Advent.Y2024.Day4.Part1
+import Advent.Y2024.Day4.WordSearch
 import Data.Maybe
 import Data.Vector (Vector)
 import qualified Data.Vector as V
@@ -54,9 +55,15 @@ crossGrid
   , "..SS"
   ]
 
+hSamxGrid :: Grid Char
+hSamxGrid = fromJust . mkGrid $ ["SAMX"]
+
+vSamxGrid :: Grid Char
+vSamxGrid = fromJust . mkGrid $ [ "S", "A", "M", "X" ]
+
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2024 -  - Part 1" $ do
+  describe "Advent - Y2024 -  - Part 1" $ do
     describe "north" $ do
       context "Given the small example" $ do
         it "should find XMAS at 1,4" $ do
@@ -122,6 +129,12 @@ spec = do
           hits (== 'X') findXmas crazyGrid `shouldBe` 8
         it "should find none when we target '.'" $ do
           hits (== '.') findXmas crazyGrid `shouldBe` 0
+      context "Given the horizontal SAMX grid" $ do
+        it "should find 1 hit" $ do
+          hits (== 'X') findXmas hSamxGrid `shouldBe` 1
+      context "Given the vertical SAMX grid" $ do
+        it "should find 1 hit" $ do
+          hits (== 'X') findXmas vSamxGrid `shouldBe` 1
 
       context "Given the cross grid" $ do
         it "should find 3" $ do

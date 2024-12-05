@@ -3,6 +3,7 @@ module Advent.Grid where
 import Data.List.Split (chunksOf)
 import Data.Vector (Vector)
 import qualified Data.Vector as V
+import Prelude hiding (get)
 
 data Grid a
   = Grid
@@ -33,4 +34,20 @@ cols (Grid w _ cells) =
 
 -- | Return a value within the bounds of the Grid
 get :: Grid a -> Int -> Int -> Maybe a
-get (Grid w _ cells) x y = cells V.!? (y * w + x)
+get (Grid w h cells) x y
+  | x >= 0 && x < w && y >= 0 && y < h = cells V.!? (y * w + x)
+  | otherwise = Nothing
+
+-- | Return a list of the valid indices
+indices :: Grid a -> [(Int, Int)]
+indices g =
+  [ (x, y)
+  | y <- [0..(_gridHeight g)-1]
+  , x <- [0..(_gridWidth g)-1]
+  ]
+
+toList :: Grid a -> [[a]]
+toList g =
+  [ catMaybes [ get g x y | x <- [0..(_gridWidth g)-1] ]
+  | y <- [0..(_gridHeight g)-1]
+  ]

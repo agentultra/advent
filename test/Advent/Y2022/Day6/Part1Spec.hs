@@ -8,14 +8,14 @@ import Advent.Y2022.Day6.Signal
 
 spec :: Spec
 spec = do
-  fdescribe "isPacketMarker" $ do
+  describe "isPacketMarker" $ do
     it "should be True for a valid packet marker" $ do
       isPacketMarker 4 "abcd" `shouldBe` True
 
     it "should be False for an invalid packet marker" $ do
       isPacketMarker 4 "cbcd" `shouldBe` False
 
-  fdescribe "findPacketMarkerIndex" $ do
+  describe "findPacketMarkerIndex" $ do
     it "should solve the first example" $ do
       findPacketMarkerIndex 4 "bvwbjplbgvbhsrlpgdmjqwftvncz" `shouldBe` Just 5
 

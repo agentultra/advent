@@ -3,26 +3,12 @@ module Advent.Y2024.Day4.Part1 where
 import Advent.Grid (Grid)
 import qualified Advent.Grid as Grid
 import Advent.Input
+import Advent.Y2024.Day4.WordSearch
 import Data.Maybe
 import qualified Data.Text as T
 
-import qualified Debug.Trace as Debug
-
 xmas :: String
 xmas = "XMAS"
-
-hits
-  :: (Char -> Bool)
-  -> ((Int, Int) -> Grid Char -> Int)
-  -> Grid Char
-  -> Int
-hits target search grid
-  = let counts = [ search (x, y) grid
-                 | x <- [0..(Grid._gridWidth grid)-1]
-                 , y <- [0..(Grid._gridHeight grid)-1]
-                 , target . fromJust $ Grid.get grid x y
-                 ]
-    in sum counts
 
 findXmas :: (Int, Int) -> Grid Char -> Int
 findXmas ix grid
