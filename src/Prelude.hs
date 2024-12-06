@@ -5,6 +5,7 @@ module Prelude
   , eitherToMaybe
   , lookupKey
   , maybeTrue
+  , orElse
   , pairs
   , readDecimals
   , readInt
@@ -68,6 +69,10 @@ maybeTrue :: (a -> Bool) -> a -> Maybe a
 maybeTrue p x
   | p x       = Just x
   | otherwise = Nothing
+
+orElse :: Text -> Either b a -> a
+orElse err (Left _) = error err
+orElse _ (Right result) = result
 
 -- | Like 'Data.List.lookup' but find the key based on the value
 lookupKey :: Eq a => a -> [(b, a)] -> Maybe b

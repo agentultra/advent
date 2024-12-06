@@ -42,6 +42,10 @@ library:
   - bytestring
   - containers
   - errors
+  - microlens
+  - microlens-mtl
+  - microlens-th
+  - mtl
   - relude
   - replace-attoparsec
   - split

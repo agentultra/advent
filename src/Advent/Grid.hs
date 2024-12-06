@@ -13,6 +13,9 @@ data Grid a
   }
   deriving (Eq, Show)
 
+instance Functor Grid where
+  f `fmap` (Grid w h cells) = Grid w h (f `fmap` cells)
+
 mkGrid :: [[a]] -> Maybe (Grid a)
 mkGrid ps = do
   h <- maybeTrue (> 0) $ length ps
@@ -51,6 +54,12 @@ indices g =
   | y <- [0..(_gridHeight g)-1]
   , x <- [0..(_gridWidth g)-1]
   ]
+
+-- | Find the index of the element
+findIndex :: (a -> Bool) -> Grid a -> Maybe (Int, Int)
+findIndex p (Grid w _ cells) = do
+  m <- V.findIndex p cells
+  pure (m `rem` w, m `div` w)
 
 toList :: Grid a -> [[a]]
 toList g =

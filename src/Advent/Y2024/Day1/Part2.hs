@@ -30,7 +30,3 @@ histogram = foldl' count mempty
 
 fromHist :: Int -> Map Int Int -> Int
 fromHist x h = Maybe.fromMaybe 0 $ x `Map.lookup` h
-
-orElse :: Text -> Either b a -> a
-orElse err (Left _) = error err
-orElse _ (Right result) = result

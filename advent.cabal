@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c2c078695bf74417393b974b591e4f6c4264145e656cf0f28297400fcf867b2d
+-- hash: 2e4432d70737a44df3a3ba5533b94e725186039ce3924f4a97d9f174814dc8e0
 
 name:           advent
 version:        0.1.0.0
@@ -274,8 +274,10 @@ library
       Advent.Y2024.Day5.Part2
       Advent.Y2024.Day5.Rule
       Advent.Y2024.Day5.Update
+      Advent.Y2024.Day6.Input
       Advent.Y2024.Day6.Part1
       Advent.Y2024.Day6.Part2
+      Advent.Y2024.Day6.Room
       Advent.Y2024.Day7.Part1
       Advent.Y2024.Day7.Part2
       Advent.Y2024.Day8.Part1
@@ -303,6 +305,10 @@ library
     , bytestring
     , containers
     , errors
+    , microlens
+    , microlens-mtl
+    , microlens-th
+    , mtl
     , relude
     , replace-attoparsec
     , split
