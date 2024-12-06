@@ -7,8 +7,6 @@ import Data.Either
 import qualified Data.List.NonEmpty as NE
 import Data.Text.IO as T
 
-import qualified Debug.Trace as Debug
-
 validUpdate :: RuleMap -> Update -> Bool
 validUpdate rmap (Update pages) =
   let ps = NE.toList pages

@@ -6,8 +6,6 @@ import qualified Data.List.NonEmpty as NE
 import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map
 
-import qualified Debug.Trace as Debug
-
 -- | Determines ordering of pairs
 --
 -- @(x, y)@ means that @x@ should sort before @y@, not necessarily
