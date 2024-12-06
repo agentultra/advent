@@ -38,6 +38,12 @@ get (Grid w h cells) x y
   | x >= 0 && x < w && y >= 0 && y < h = cells V.!? (y * w + x)
   | otherwise = Nothing
 
+set :: Grid a -> Int -> Int -> a -> Maybe (Grid a)
+set (Grid w h cells) x y v
+  | x >= 0 && x < w && y >= 0 && y < h =
+    Just . Grid w h $ cells V.// [(y * w + x, v)]
+  | otherwise = Nothing
+
 -- | Return a list of the valid indices
 indices :: Grid a -> [(Int, Int)]
 indices g =
