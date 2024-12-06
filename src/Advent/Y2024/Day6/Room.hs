@@ -33,11 +33,12 @@ data GuardCommand
 
 data Room
   = Room
-  { _guardPos    :: (Int, Int)
-  , _guardFacing :: Facing
-  , _guardPath   :: [(Int, Int)]
-  , _roomGrid    :: Grid Tile
-  , _done        :: Bool
+  { _guardPos        :: (Int, Int)
+  , _guardFacing     :: Facing
+  , _guardPath       :: [(Int, Int)]
+  , _potentialBlocks :: Int
+  , _roomGrid        :: Grid Tile
+  , _done            :: Bool
   }
   deriving (Eq, Show)
 
@@ -46,11 +47,12 @@ makeLenses ''Room
 mkRoom :: (Int, Int) -> Grid Tile -> Room
 mkRoom pos grid
   = Room
-  { _guardPos    =  pos
-  , _guardFacing = North
-  , _guardPath   = [pos]
-  , _roomGrid    = grid
-  , _done        = False
+  { _guardPos        =  pos
+  , _guardFacing     = North
+  , _guardPath       = [pos]
+  , _potentialBlocks = 0
+  , _roomGrid        = grid
+  , _done            = False
   }
 
 (.+.) :: (Int, Int) -> (Int, Int) -> (Int, Int)
@@ -71,6 +73,13 @@ fromFacing = \case
   South -> (0, 1)
   West -> (-1, 0)
 
+facingRight :: Facing -> Facing
+facingRight = \case
+  North -> East
+  East  -> South
+  South -> West
+  West  -> North
+
 moveForward :: State Room ()
 moveForward = do
   pos <- use guardPos
@@ -83,16 +92,19 @@ moveForward = do
 turnRight :: State Room ()
 turnRight = do
   facing <- use guardFacing
-  case facing of
-    North -> guardFacing .= East
-    East  -> guardFacing .= South
-    South -> guardFacing .= West
-    West  -> guardFacing .= North
+  guardFacing .= facingRight facing
 
 moveGuard :: State Room ()
 moveGuard = do
   peekTile <- checkCollision
+  facing <- use guardFacing
+  pos <- use guardPos
+  path <- use guardPath
+  let posRight = pos .+. (fromFacing $ facingRight facing)
   case peekTile of
     Nothing -> done .= True
     Just t | t == Wall -> turnRight >> moveForward
-    Just t | t == Floor -> moveForward
+    Just t | t == Floor -> do
+               when (posRight `elem` path) $ do
+                 potentialBlocks += 1
+               moveForward
