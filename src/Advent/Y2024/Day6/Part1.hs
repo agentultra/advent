@@ -4,7 +4,7 @@ import Advent.Input
 import Advent.Y2024.Day6.Input
 import Advent.Y2024.Day6.Room
 import Control.Monad.State.Strict
-import qualified Data.Set as Set
+import qualified Data.Map as Map
 import Lens.Micro
 import Lens.Micro.Mtl
 
@@ -13,7 +13,7 @@ answer = do
   isDone <- use done
   path <- use guardPath
   if isDone
-    then pure . Set.size . Set.fromList $ path
+    then pure $ Map.size path
     else moveGuard >> answer
 
 solution :: IO ()

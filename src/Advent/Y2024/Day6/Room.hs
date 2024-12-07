@@ -1,10 +1,12 @@
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module Advent.Y2024.Day6.Room where
 
 import Advent.Grid (Grid)
 import qualified Advent.Grid as Grid
-import Control.Monad.State.Strict
+import qualified Data.Map as Map
+import qualified Data.Set as Set
 import Lens.Micro
 import Lens.Micro.Mtl
 import Lens.Micro.TH
@@ -23,19 +25,13 @@ fromChar '^' = Just Floor
 fromChar _   = Nothing
 
 data Facing = North | East | South | West
-  deriving (Eq, Show)
-
-data GuardCommand
-  = TurnLeft
-  | TurnRight
-  | MoveForward
-  deriving (Eq, Show)
+  deriving (Eq, Ord, Show)
 
 data Room
   = Room
   { _guardPos        :: (Int, Int)
   , _guardFacing     :: Facing
-  , _guardPath       :: [(Int, Int)]
+  , _guardPath       :: Map (Int, Int) (Set Facing)
   , _potentialBlocks :: Int
   , _roomGrid        :: Grid Tile
   , _done            :: Bool
@@ -47,9 +43,9 @@ makeLenses ''Room
 mkRoom :: (Int, Int) -> Grid Tile -> Room
 mkRoom pos grid
   = Room
-  { _guardPos        =  pos
+  { _guardPos        = pos
   , _guardFacing     = North
-  , _guardPath       = [pos]
+  , _guardPath       = Map.singleton pos $ Set.singleton North
   , _potentialBlocks = 0
   , _roomGrid        = grid
   , _done            = False
@@ -63,7 +59,7 @@ checkCollision = do
   pos <- use guardPos
   facing <- use guardFacing
   grid <- use roomGrid
-  let (x', y') = pos .+. (fromFacing facing)
+  let (x', y') = pos .+. fromFacing facing
   pure $ Grid.get grid x' y'
 
 fromFacing :: Facing -> (Int, Int)
@@ -85,26 +81,42 @@ moveForward = do
   pos <- use guardPos
   facing <- use guardFacing
   path <- use guardPath
-  let nextPos = pos .+. (fromFacing facing)
-  guardPath .= nextPos : path
+  let nextPos = pos .+. fromFacing facing
+  guardPath .= Map.alter (updatePath facing) pos path
   guardPos .= nextPos
+
+updatePath :: Facing -> Maybe (Set Facing) -> Maybe (Set Facing)
+updatePath facing Nothing = Just $ Set.singleton facing
+updatePath facing (Just facings) = Just $ facing `Set.insert` facings
 
 turnRight :: State Room ()
 turnRight = do
+  pos <- use guardPos
   facing <- use guardFacing
-  guardFacing .= facingRight facing
+  let facing' = facingRight facing
+  guardFacing .= facing'
+  guardPath %= \path -> Map.alter (updatePath facing) pos path
 
 moveGuard :: State Room ()
 moveGuard = do
   peekTile <- checkCollision
-  facing <- use guardFacing
-  pos <- use guardPos
-  path <- use guardPath
-  let posRight = pos .+. (fromFacing $ facingRight facing)
   case peekTile of
-    Nothing -> done .= True
-    Just t | t == Wall -> turnRight >> moveForward
-    Just t | t == Floor -> do
-               when (posRight `elem` path) $ do
-                 potentialBlocks += 1
-               moveForward
+    Nothing -> do
+      pos <- use guardPos
+      facing <- use guardFacing
+      guardPath %= \path -> Map.alter (updatePath facing) pos path
+      done .= True
+    Just t ->
+      case t of
+        Wall  -> turnRight
+        Floor -> moveForward
+
+isDone :: Room -> Bool
+isDone room = room ^. done
+
+runSimulationUntil :: (Room -> Bool) -> State Room ()
+runSimulationUntil p = do
+  r <- get
+  if p r
+    then pure ()
+    else moveGuard >> runSimulationUntil p
