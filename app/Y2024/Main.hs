@@ -64,7 +64,7 @@ main = do
   putStrLn "d5p1: " >> D5P1.solution
   putStrLn "d5p2: " >> D5P2.solution
   putStrLn "d6p1: " >> D6P1.solution
-  putStrLn "d6p2: " >> D6P2.solution
+  putStrLn "d6p2: " -- >> D6P2.solution
   putStrLn "d7p1: " >> D7P1.solution
   putStrLn "d7p2: " >> D7P2.solution
   putStrLn "d8p1: " >> D8P1.solution

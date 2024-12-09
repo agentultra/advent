@@ -9,7 +9,7 @@ import Advent.Y2024.Day6.Room
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2024 -  - Part 2" $ do
+  describe "Advent - Y2024 -  - Part 2" $ do
 
     raw <- runIO $ readInput "data/2024/Day6-sample.txt"
     let (room, guardPos) = orElse "Invalid input" $ parseInput raw
