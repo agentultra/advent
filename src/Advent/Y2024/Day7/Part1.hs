@@ -13,4 +13,4 @@ solution = do
   raw <- T.readFile "data/2024/Day7.txt"
   let calibrations = fromRight (error "Invalid input") $ getInput raw
       validCalibrations = filter C.validCalibration calibrations
-  print . sum . map C.sum $ validCalibrations
+  print . sum . map C.result $ validCalibrations
