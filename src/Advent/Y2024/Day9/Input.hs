@@ -1,9 +1,12 @@
+{-# LANGUAGE OverloadedRecordDot #-}
+
 module Advent.Y2024.Day9.Input where
 
 import Advent.Y2024.Day9.File
 import Data.Attoparsec.Text hiding (take)
 import Data.Char
 import qualified Data.List.NonEmpty as NE
+import qualified Data.Map.Strict as M
 import Data.Vector (Vector)
 import qualified Data.Vector as V
 
@@ -15,6 +18,7 @@ data ParseState
   { fileIndex  :: Int
   , blockKind  :: BlockKind
   , diskVector :: Vector Int
+  , freeMap    :: Map Int Int
   }
   deriving (Eq, Show)
 
@@ -42,10 +46,19 @@ parseFreeBlock = do
   disk <- gets diskVector
   size <- digitToInt <$> lift digit
   let disk' = V.concat [disk,  V.replicate size (-1)]
+      freeMap' = M.insert (V.length disk + 1) size
   put $ ps { blockKind = FileKind, diskVector = disk' }
 
 parseBlocks :: StateT ParseState Parser ()
 parseBlocks = many1' parseBlock >> pure ()
 
-getInput :: Text -> Either String (Vector Int)
-getInput raw = diskVector <$> parseOnly (execStateT parseBlocks $ ParseState 0 FileKind V.empty) raw
+getInput :: Text -> Either String (Vector Int, Map Int Int)
+getInput raw
+  = getResults <$> parseOnly statefulParser raw
+  where
+    statefulParser :: Parser ParseState
+    statefulParser
+      = execStateT parseBlocks $ ParseState 0 FileKind V.empty M.empty
+
+    getResults :: ParseState -> (Vector Int, Map Int Int)
+    getResults s = (s.diskVector, s.freeMap)
