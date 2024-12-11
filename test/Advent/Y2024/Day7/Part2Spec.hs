@@ -7,7 +7,7 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2024 -  - Part 2" $ do
+  describe "Advent - Y2024 -  - Part 2" $ do
     describe "The .||. operator" $ do
       context "12 .||. 34" $ do
         it "should equal 1234" $ do

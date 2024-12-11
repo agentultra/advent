@@ -10,7 +10,7 @@ import qualified Data.Text.IO as T
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2024 -  - Part 1" $ do
+  describe "Advent - Y2024 -  - Part 1" $ do
     describe "validCalibration" $ do
       context "10: 10" $ do
         it "should be valid" $ do
