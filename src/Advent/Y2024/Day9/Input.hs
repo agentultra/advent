@@ -18,7 +18,7 @@ data ParseState
   { fileIndex  :: Int
   , blockKind  :: BlockKind
   , diskVector :: Vector Int
-  , freeMap    :: Map Int Int
+  , freeMap    :: FreeMap
   }
   deriving (Eq, Show)
 
@@ -44,21 +44,22 @@ parseFreeBlock :: StateT ParseState Parser ()
 parseFreeBlock = do
   ps <- get
   disk <- gets diskVector
+  free <- gets freeMap
   size <- digitToInt <$> lift digit
   let disk' = V.concat [disk,  V.replicate size (-1)]
-      freeMap' = M.insert (V.length disk + 1) size
-  put $ ps { blockKind = FileKind, diskVector = disk' }
+      freeMap' = FreeMap $ M.insert (V.length disk + 1) size free.getFreeMap
+  put $ ps { blockKind = FileKind, diskVector = disk', freeMap = freeMap' }
 
 parseBlocks :: StateT ParseState Parser ()
 parseBlocks = many1' parseBlock >> pure ()
 
-getInput :: Text -> Either String (Vector Int, Map Int Int)
+getInput :: Text -> Either String (Vector Int, FreeMap)
 getInput raw
   = getResults <$> parseOnly statefulParser raw
   where
     statefulParser :: Parser ParseState
     statefulParser
-      = execStateT parseBlocks $ ParseState 0 FileKind V.empty M.empty
+      = execStateT parseBlocks $ ParseState 0 FileKind V.empty mempty
 
-    getResults :: ParseState -> (Vector Int, Map Int Int)
+    getResults :: ParseState -> (Vector Int, FreeMap)
     getResults s = (s.diskVector, s.freeMap)
