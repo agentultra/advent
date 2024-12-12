@@ -9,5 +9,5 @@ import Prelude hiding (swap)
 solution :: IO ()
 solution = do
   raw <- T.readFile "data/2024/Day9.txt"
-  let (blocks, _) = fromRight (error "Invalid input") $ getInput raw
+  let (blocks, _, _) = fromRight (error "Invalid input") $ getInput raw
   print . checksum . compact swap $ blocks
