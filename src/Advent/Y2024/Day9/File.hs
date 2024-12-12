@@ -26,13 +26,14 @@ minIndexOf size = fmap fst . List.find fitsSizeOf . Map.assocs . getFreeMap
     fitsSizeOf (_, y) = size <= y
 
 updateFree :: Int -> Int -> FreeMap -> FreeMap
-updateFree ix size = FreeMap . Map.alter modifyFree ix . getFreeMap
-  where
-    modifyFree :: Maybe Int -> Maybe Int
-    modifyFree (Just x) | x < size = Just $ size - x
-    modifyFree (Just x) | x == size = Nothing
-    modifyFree (Just x) | x > size = error "updateFree: tried to over-allocate a free block"
-    modifyFree Nothing = error "updateFree: tried to modify a non-existent free block"
+updateFree ix size (FreeMap free) =
+  case ix `Map.lookup` free of
+    Nothing -> error . toText $ "updateFree: " ++ show ix ++ " is not a valid free block"
+    (Just x) | x < size -> error "updateFree: tried to over-allocate a free block"
+    (Just x) | x == size -> FreeMap $ ix `Map.delete` free
+    (Just x) | x > size ->
+             let free' = ix `Map.delete` free
+             in FreeMap $ Map.insert (ix + size) (x - size) free'
 
 data FileMeta
   = FileMeta
@@ -43,7 +44,9 @@ data FileMeta
   deriving (Eq, Show)
 
 filesize :: FileMeta -> Int
-filesize (FileMeta _ lo hi) = hi - lo
+filesize (FileMeta i lo hi)
+  | hi < lo = error . toText $ "filesize: " ++ show i ++ " " ++ show lo ++ " " ++ show hi
+  | otherwise = (hi - lo) + 1
 
 moveFileBlock :: forall s. Int -> FileMeta -> V.MVector s Int -> ST s ()
 moveFileBlock ix fileMeta disk = do
@@ -87,3 +90,17 @@ checksum = V.ifoldl' csum 0
     csum acc ix c
       | c >= 0 = acc + (c * ix)
       | otherwise = acc
+
+showDisk :: V.Vector Int -> String
+showDisk = concat . V.toList . V.map toString
+  where
+    toString :: Int -> String
+    toString (-1) = "."
+    toString x    = show x
+
+showMDisk :: V.MVector s Int -> ST s String
+showMDisk = MV.foldl' (\acc d -> acc ++ toString d) []
+  where
+    toString :: Int -> String
+    toString (-1) = "."
+    toString x    = show x
