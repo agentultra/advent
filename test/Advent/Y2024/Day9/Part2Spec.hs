@@ -32,3 +32,21 @@ spec = do
         it "should calculate expected checksum" $ do
           (checksum . compact (block free files) $ disk)
             `shouldBe` 2858
+
+      context "Given 201" $ do
+        it "should not compact anything" $ do
+          let (d, fr, fls) = fromRight (error "Invalid input") $ getInput "201"
+              expected = V.fromList [ 0, 0, 1 ]
+          compact (block fr fls) d `shouldBe` expected
+
+      context "Given 111" $ do
+        it "should compact one file block" $ do
+          let (d, fr, fls) = fromRight (error "Invalid input") $ getInput "111"
+              expected = V.fromList [ 0, 1, (-1) ]
+          compact (block fr fls) d `shouldBe` expected
+
+      context "Given 13102" $ do
+        it "should compact into the only free block" $ do
+          let (d, fr, fls) = fromRight (error "Invalid input") $ getInput "13102"
+              expected = V.fromList [ 0, 2, 2, 1, (-1), (-1), (-1) ]
+          compact (block fr fls) d `shouldBe` expected
