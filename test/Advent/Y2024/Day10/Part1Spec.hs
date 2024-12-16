@@ -5,6 +5,7 @@ import Test.Hspec
 import Advent.Y2024.Day10.Input
 import Advent.Y2024.Day10.Part1
 import Advent.Y2024.Day10.Trail
+import qualified Data.List as List
 import qualified Data.Text.IO as T
 
 spec :: Spec
@@ -21,7 +22,7 @@ spec = do
 
       describe "findTrails" $ do
         it "should find 1 at (0, 0)" $ do
-          findTrails (Trailhead (0, 0)) trailMap `shouldBe` 1
+          findTrails List.nub trailMap (Trailhead (0, 0)) `shouldBe` 1
 
     context "Given the sample" $ do
 
@@ -47,4 +48,4 @@ spec = do
 
       describe "findTrails" $ do
         it "should find 5 at (2, 0)" $ do
-          findTrails (Trailhead (2, 0)) trailMap `shouldBe` 5
+          findTrails List.nub trailMap (Trailhead (2, 0)) `shouldBe` 5

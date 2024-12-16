@@ -4,7 +4,7 @@ cabal-version: 2.0
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2a4c889439f04cdc85d336e83b01b0a998a5e62370e3b249cf5844faa8b99a65
+-- hash: 262c80adcc4780a95e51e5ea86db5c6246628b2007a199b9863f01729a0f16a8
 
 name:           advent
 version:        0.1.0.0
@@ -231,8 +231,10 @@ library
       Advent.Y2024.Day10.Part1
       Advent.Y2024.Day10.Part2
       Advent.Y2024.Day10.Trail
+      Advent.Y2024.Day11.Input
       Advent.Y2024.Day11.Part1
       Advent.Y2024.Day11.Part2
+      Advent.Y2024.Day11.Stone
       Advent.Y2024.Day12.Part1
       Advent.Y2024.Day12.Part2
       Advent.Y2024.Day13.Part1
