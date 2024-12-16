@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedRecordDot #-}
+{-# LANGUAGE RankNTypes #-}
 
 module Advent.Y2024.Day10.Trail where
 
@@ -18,8 +19,8 @@ getTrailheads (TrailMap trailMap)
   . Grid.findIndices (== 0)
   $ trailMap
 
-findTrails :: Trailhead -> TrailMap -> Int
-findTrails (Trailhead trailHead) trailMap
+findTrails :: (forall a. Eq a => [a] -> [a]) -> TrailMap -> Trailhead -> Int
+findTrails select trailMap (Trailhead trailHead)
   = go trailMap 0 (validDirections trailHead trailMap)
   where
     go :: TrailMap -> Int -> [(Int, Int)] -> Int
@@ -29,20 +30,7 @@ findTrails (Trailhead trailHead) trailMap
         Nothing -> go trailMap count xs
         Just v | v == 9 -> go trailMap (count + 1) xs
         Just _ | otherwise ->
-                 go tm count . List.nub $ xs ++ (validDirections x trailMap)
-
-findDistinctTrails :: Trailhead -> TrailMap -> Int
-findDistinctTrails (Trailhead trailHead) trailMap
-  = go trailMap 0 (validDirections trailHead trailMap)
-  where
-    go :: TrailMap -> Int -> [(Int, Int)] -> Int
-    go _ count [] = count
-    go tm count (x:xs) =
-      case Grid.getAt trailMap.getTrailMap x of
-        Nothing -> go trailMap count xs
-        Just v | v == 9 -> go trailMap (count + 1) xs
-        Just _ | otherwise ->
-                 go tm count $ xs ++ (validDirections x trailMap)
+                 go tm count . select $ xs ++ (validDirections x trailMap)
 
 validDirections :: (Int, Int) -> TrailMap -> [(Int, Int)]
 validDirections p tm = do

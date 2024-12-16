@@ -7,7 +7,7 @@ import qualified Data.Text.IO as T
 answer :: TrailMap -> Int
 answer trailMap
   = sum
-  . map (`findDistinctTrails` trailMap)
+  . map (findTrails id trailMap)
   $ getTrailheads trailMap
 
 solution :: IO ()
