@@ -3,13 +3,9 @@
 
 module Advent.Y2024.Day10.Trail where
 
-import Advent.Grid (Grid, Direction, (.+.))
+import Advent.Grid (Grid, (.+.))
 import qualified Advent.Grid as Grid
-import Advent.Trie (Trie)
-import qualified Advent.Trie as Trie
-import Data.List ((++))
 import qualified Data.List as List
-import qualified Data.Set as Set
 
 newtype TrailMap = TrailMap { getTrailMap :: Grid Int }
   deriving (Eq, Show)
