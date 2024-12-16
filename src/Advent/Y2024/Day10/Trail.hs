@@ -11,8 +11,6 @@ import Data.List ((++))
 import qualified Data.List as List
 import qualified Data.Set as Set
 
-import qualified Debug.Trace as Debug
-
 newtype TrailMap = TrailMap { getTrailMap :: Grid Int }
   deriving (Eq, Show)
 
