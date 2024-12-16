@@ -3,7 +3,7 @@
 
 module Advent.Y2024.Day6.Room where
 
-import Advent.Grid (Grid)
+import Advent.Grid (Grid, (.+.))
 import qualified Advent.Grid as Grid
 import qualified Data.Map as Map
 import qualified Data.Set as Set
@@ -50,9 +50,6 @@ mkRoom pos grid
   , _roomGrid        = grid
   , _done            = False
   }
-
-(.+.) :: (Int, Int) -> (Int, Int) -> (Int, Int)
-(x1, y1) .+. (x2, y2) = (x1 + x2, y1 + y2)
 
 checkCollision :: State Room (Maybe Tile)
 checkCollision = do

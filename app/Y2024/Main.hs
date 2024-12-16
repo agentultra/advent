@@ -69,8 +69,8 @@ main = do
   putStrLn "d7p2: " >> D7P2.solution
   putStrLn "d8p1: " >> D8P1.solution
   putStrLn "d8p2: " >> D8P2.solution
-  putStrLn "d9p1: " >> D9P1.solution
-  putStrLn "d9p2: " >> D9P2.solution
+  putStrLn "d9p1: " -- >> D9P1.solution
+  putStrLn "d9p2: " -- >> D9P2.solution
   putStrLn "d10p1: " >> D10P1.solution
   putStrLn "d10p2: " >> D10P2.solution
   putStrLn "d11p1: " >> D11P1.solution

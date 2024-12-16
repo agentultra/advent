@@ -41,6 +41,9 @@ get (Grid w h cells) x y
   | x >= 0 && x < w && y >= 0 && y < h = cells V.!? (y * w + x)
   | otherwise = Nothing
 
+getAt :: Grid a -> (Int, Int) -> Maybe a
+getAt g (x, y) = get g x y
+
 set :: Grid a -> Int -> Int -> a -> Maybe (Grid a)
 set (Grid w h cells) x y v
   | x >= 0 && x < w && y >= 0 && y < h =
@@ -61,8 +64,38 @@ findIndex p (Grid w _ cells) = do
   m <- V.findIndex p cells
   pure (m `rem` w, m `div` w)
 
+findIndices :: (a -> Bool) -> Grid a -> [(Int, Int)]
+findIndices p (Grid w _ cells) = V.toList . V.map toGridIndex . V.findIndices p $ cells
+  where
+    toGridIndex :: Int -> (Int, Int)
+    toGridIndex m = (m `rem` w, m `div` w)
+
 toList :: Grid a -> [[a]]
 toList g =
   [ catMaybes [ get g x y | x <- [0..(_gridWidth g)-1] ]
   | y <- [0..(_gridHeight g)-1]
   ]
+
+data Direction
+  = North
+  | East
+  | South
+  | West
+  deriving (Bounded, Enum, Eq, Ord, Show)
+
+directions :: [Direction]
+directions = universe
+
+offset :: Direction -> (Int, Int)
+offset North = (0, -1)
+offset East  = (1,  0)
+offset South = (0,  1)
+offset West  = (-1, 0)
+
+(.+.) :: (Int, Int) -> (Int, Int) -> (Int, Int)
+(x1, y1) .+. (x2, y2) = (x1 + x2, y1 + y2)
+
+getDirection :: (Int, Int) -> Direction -> Grid a -> Maybe a
+getDirection pos dir grid =
+  let (x, y) = pos .+. offset dir
+  in get grid x y
