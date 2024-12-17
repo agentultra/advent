@@ -8,10 +8,15 @@ spec :: Spec
 spec = do
   fdescribe "Advent - Y2024 - Day 11 - Part 1" $ do
     describe "blink" $ do
-      context "Given 0 1 10 99 999" $ do
-        it "should give 1 2024 1 0 9 9 2021976" $ do
-          blink ["0", "1", "10", "99", "999"]
-            `shouldBe` ["1", "2024", "1", "0", "9", "9", "2021976"]
+      context "Given 0" $ do
+        it "should give [1]" $ do
+          blink "0" `shouldBe` ["1"]
+      context "Given 10" $ do
+        it "should give [1, 0]" $ do
+          blink "10" `shouldBe` ["0", "1"]
+      context "Given 3" $ do
+        it "should give [6072]" $ do
+          blink "3" `shouldBe` ["6072"]
 
     describe "answer" $ do
       context "Given 125 17" $ do
