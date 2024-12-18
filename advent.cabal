@@ -235,6 +235,7 @@ library
       Advent.Y2024.Day11.Part1
       Advent.Y2024.Day11.Part2
       Advent.Y2024.Day11.Stone
+      Advent.Y2024.Day12.Input
       Advent.Y2024.Day12.Part1
       Advent.Y2024.Day12.Part2
       Advent.Y2024.Day13.Part1
