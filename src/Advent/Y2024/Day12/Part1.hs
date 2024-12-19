@@ -9,7 +9,6 @@ import qualified Advent.Grid as Grid
 import Advent.Y2024.Day12.Input
 import qualified Data.Map as Map
 import qualified Data.Text.IO as T
-import Lens.Micro
 import Lens.Micro.Mtl
 import Lens.Micro.TH
 
