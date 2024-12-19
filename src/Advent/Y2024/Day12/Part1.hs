@@ -33,7 +33,7 @@ data RegionSearch
 makeLenses ''RegionSearch
 
 answer :: Grid Char -> Int
-answer grid = evalState search $ RegionSearch (mkVisited grid) grid 0
+answer g = evalState search $ RegionSearch (mkVisited g) g 0
 
 search :: State RegionSearch Int
 search = do
