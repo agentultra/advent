@@ -4,7 +4,7 @@
 
 module Advent.Y2024.Day12.Part1 where
 
-import Advent.Grid (Grid, (.+.))
+import Advent.Grid (Direction, Grid, (.+.))
 import qualified Advent.Grid as Grid
 import Advent.Y2024.Day12.Input
 import qualified Data.Map as Map
@@ -23,16 +23,17 @@ allDone = and . Map.elems
 
 data RegionSearch
   = RegionSearch
-  { _visited   :: Map (Int, Int) Bool
-  , _grid      :: Grid Char
-  , _totalSum  :: Int
+  { _visited        :: Map (Int, Int) Bool
+  , _grid           :: Grid Char
+  , _perimeterSum   :: [Maybe ((Int, Int), Char)] -> Int
+  , _perimeterTotal :: Int -> Int
+  , _totalSum       :: Int
   }
-  deriving (Eq, Show)
 
 makeLenses ''RegionSearch
 
 answer :: Grid Char -> Int
-answer g = evalState search $ RegionSearch (mkVisited g) g 0
+answer g = evalState search $ RegionSearch (mkVisited g) g length id 0
 
 search :: State RegionSearch Int
 search = do
@@ -49,12 +50,15 @@ floodFill :: (Int, Int) -> State RegionSearch Int
 floodFill x = go [x] [x] 0 0
   where
     go :: [(Int, Int)] -> [(Int, Int)] -> Int -> Int -> State RegionSearch Int
-    go [] _ area perimeter     = pure $ area * perimeter
+    go [] _ area perimeter = do
+      pt <- use perimeterTotal
+      pure $ area * pt perimeter
     go (y:ys) internal area perimeter = do
       g <- use grid
+      pf <- use perimeterSum
       let ns = neighbours y g
           c = fromMaybe (error "couldn't get cell") $ Grid.getAt g y
-          perimeter' = perimeter + length (filter (isPerimeterCell c) ns)
+          perimeter' = perimeter + pf (filter (isPerimeterCell c) ns)
           area' = area + 1
           ncs = catMaybes ns
           stack' = map fst . filter (unvisitedInternalCell c internal) $ ncs
