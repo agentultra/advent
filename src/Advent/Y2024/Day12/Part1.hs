@@ -9,7 +9,12 @@ import Advent.Y2024.Day12.Input
 import qualified Data.Text.IO as T
 
 answer :: Grid Char -> Int
-answer g = evalState search $ RegionSearch (mkVisited g) g ortho (const length) id 0
+answer g
+  = evalState search
+  $ RegionSearch (mkVisited g) g ortho sumPerimeter getSum 0
+  where
+    sumPerimeter :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> Sum Int
+    sumPerimeter _ xs = Sum $ length xs
 
 ortho :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
 ortho c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d) | d <- Grid.orthogonal ]

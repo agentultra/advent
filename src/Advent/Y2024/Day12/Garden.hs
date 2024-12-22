@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TupleSections #-}
 
@@ -19,19 +20,19 @@ pick = listToMaybe . map fst . filter (not . snd) . Map.assocs
 allDone :: Map (Int, Int) Bool -> Bool
 allDone = and . Map.elems
 
-data RegionSearch
+data RegionSearch a
   = RegionSearch
   { _visited        :: Map (Int, Int) Bool
   , _grid           :: Grid Char
   , _neighbours     :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
-  , _perimeterSum   :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> Int
-  , _perimeterTotal :: Int -> Int
+  , _perimeterSum   :: Monoid a => (Int, Int) -> [Maybe ((Int, Int), Char)] -> a
+  , _perimeterTotal :: Monoid a => a -> Int
   , _totalSum       :: Int
   }
 
 makeLenses ''RegionSearch
 
-search :: State RegionSearch Int
+search :: (Monoid a, Show a) => State (RegionSearch a) Int
 search = do
   vs <- use visited
   if allDone vs
@@ -42,10 +43,10 @@ search = do
     totalSum += cost
     search
 
-floodFill :: (Int, Int) -> State RegionSearch Int
-floodFill x = go [x] [x] 0 0
+floodFill :: (Monoid a, Show a) => (Int, Int) -> State (RegionSearch a) Int
+floodFill x = go [x] [x] 0 mempty
   where
-    go :: [(Int, Int)] -> [(Int, Int)] -> Int -> Int -> State RegionSearch Int
+    go :: (Monoid a, Show a) => [(Int, Int)] -> [(Int, Int)] -> Int -> a -> State (RegionSearch a) Int
     go [] _ area perimeter = do
       pt <- use perimeterTotal
       pure $ area * pt perimeter
@@ -55,7 +56,7 @@ floodFill x = go [x] [x] 0 0
       neighboursF <- use neighbours
       let ns = neighboursF y g
           c = fromMaybe (error "couldn't get cell") $ Grid.getAt g y
-          perimeter' = perimeter + ps y (filter (isPerimeterCell c) ns)
+          perimeter' = perimeter <> ps y (filter (isPerimeterCell c) ns)
           area' = area + 1
           ncs = catMaybes ns
           stack' = map fst . filter (unvisitedInternalCell c internal) $ ncs

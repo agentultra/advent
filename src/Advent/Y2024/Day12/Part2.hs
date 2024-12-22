@@ -9,12 +9,15 @@ import Advent.Y2024.Day12.Input
 import qualified Data.Text.IO as T
 
 answer :: Grid Char -> Int
-answer g = evalState search $ RegionSearch (mkVisited g) g cardinal interiorAngle sides 0
+answer g = evalState search $ RegionSearch (mkVisited g) g cardinal vertices sides 0
 
 cardinal :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
 cardinal c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d)
                | d <- Grid.cardinal
                ]
+
+vertices :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> [(Int, Int)]
+vertices _ _ = []
 
 interiorAngle :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> Int
 interiorAngle origin xs = go $ map toDir xs
@@ -56,8 +59,8 @@ bottomLeft = filter (`elem` [Just South, Just SouthWest, Just West])
 topLeft :: [Maybe Direction] -> [Maybe Direction]
 topLeft = filter (`elem` [Just West, Just NorthWest, Just North])
 
-sides :: Int -> Int
-sides n = (n `div` 180) + 2
+sides :: [(Int, Int)] -> Int
+sides = const 0
 
 solution :: IO ()
 solution = do
