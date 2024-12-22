@@ -106,8 +106,22 @@ offset SouthWest = (-1, 1)
 offset West      = (-1, 0)
 offset NorthWest = (-1, -1)
 
+fromOffset :: (Int, Int) -> Maybe Direction
+fromOffset (0, -1)  = pure North
+fromOffset (1, -1)  = pure NorthEast
+fromOffset (1,  0)  = pure East
+fromOffset (1, 1)   = pure SouthEast
+fromOffset (0,  1)  = pure South
+fromOffset (-1, 1)  = pure SouthWest
+fromOffset (-1, 0)  = pure West
+fromOffset (-1, -1) = pure NorthWest
+fromOffset _        = Nothing
+
 (.+.) :: (Int, Int) -> (Int, Int) -> (Int, Int)
 (x1, y1) .+. (x2, y2) = (x1 + x2, y1 + y2)
+
+(.-.) :: (Int, Int) -> (Int, Int) -> (Int, Int)
+(x1, y1) .-. (x2, y2) = (x1 - x2, y1 - y2)
 
 getDirection :: (Int, Int) -> Direction -> Grid a -> Maybe a
 getDirection pos dir grid =

@@ -9,7 +9,7 @@ import Advent.Y2024.Day12.Input
 import qualified Data.Text.IO as T
 
 answer :: Grid Char -> Int
-answer g = evalState search $ RegionSearch (mkVisited g) g ortho length id 0
+answer g = evalState search $ RegionSearch (mkVisited g) g ortho (const length) id 0
 
 ortho :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
 ortho c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d) | d <- Grid.orthogonal ]
