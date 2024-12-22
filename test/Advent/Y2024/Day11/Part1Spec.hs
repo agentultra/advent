@@ -6,7 +6,7 @@ import Advent.Y2024.Day11.Stone
 
 spec :: Spec
 spec = do
-  fdescribe "Advent - Y2024 - Day 11 - Part 1" $ do
+  describe "Advent - Y2024 - Day 11 - Part 1" $ do
     describe "blink" $ do
       context "Given 0" $ do
         it "should give [1]" $ do

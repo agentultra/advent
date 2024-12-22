@@ -50,10 +50,10 @@ floodFill x = go [x] [x] 0 0
       pure $ area * pt perimeter
     go (y:ys) internal area perimeter = do
       g <- use grid
-      pf <- use perimeterSum
+      ps <- use perimeterSum
       let ns = neighbours y g
           c = fromMaybe (error "couldn't get cell") $ Grid.getAt g y
-          perimeter' = perimeter + pf (filter (isPerimeterCell c) ns)
+          perimeter' = perimeter + ps (filter (isPerimeterCell c) ns)
           area' = area + 1
           ncs = catMaybes ns
           stack' = map fst . filter (unvisitedInternalCell c internal) $ ncs
