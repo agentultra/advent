@@ -24,8 +24,8 @@ data RegionSearch a
   = RegionSearch
   { _visited        :: Map (Int, Int) Bool
   , _grid           :: Grid Char
-  , _neighbours     :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
-  , _perimeterSum   :: Monoid a => (Int, Int) -> [Maybe ((Int, Int), Char)] -> a
+  , _neighbours     :: (Int, Int) -> Grid Char -> [((Int, Int), Maybe Char)]
+  , _perimeterSum   :: Monoid a => (Int, Int) -> [((Int, Int), Maybe Char)] -> a
   , _perimeterTotal :: Monoid a => a -> Int
   , _totalSum       :: Int
   }
@@ -58,19 +58,19 @@ floodFill x = go [x] [x] 0 mempty
           c = fromMaybe (error "couldn't get cell") $ Grid.getAt g y
           perimeter' = perimeter <> ps y (filter (isPerimeterCell c) ns)
           area' = area + 1
-          ncs = catMaybes ns
-          stack' = map fst . filter (unvisitedInternalCell c internal) $ ncs
-      visited %= (\v -> foldl' (updateVisited c) v (Just (y, c) : ns))
-      go (stack' ++ ys) (internal ++ map fst ncs) area' perimeter'
+          stack' = map fst . filter (unvisitedInternalCell c internal) $ ns
+      visited %= (\v -> foldl' (updateVisited c) v ((y, Just c) : ns))
+      go (stack' ++ ys) (internal ++ stack') area' perimeter'
 
-    isPerimeterCell :: Char -> Maybe ((Int, Int), Char) -> Bool
-    isPerimeterCell _ Nothing = True
-    isPerimeterCell c (Just (_, y)) = c /= y
+    isPerimeterCell :: Char -> ((Int, Int), Maybe Char) -> Bool
+    isPerimeterCell _ (_, Nothing) = True
+    isPerimeterCell c (_, Just y) = c /= y
 
-    unvisitedInternalCell :: Char -> [(Int, Int)] -> ((Int, Int), Char) -> Bool
-    unvisitedInternalCell c internal (p, x) = p `notElem` internal && c == x
+    unvisitedInternalCell :: Char -> [(Int, Int)] -> ((Int, Int), Maybe Char) -> Bool
+    unvisitedInternalCell _ _ (_, Nothing)       = False
+    unvisitedInternalCell c internal (p, Just x) = p `notElem` internal && c == x
 
-    updateVisited :: Char -> Map (Int, Int) Bool -> Maybe ((Int, Int), Char) -> Map (Int, Int) Bool
-    updateVisited _ v Nothing                = v
-    updateVisited c v (Just (n, m)) | c == m = Map.update (const $ Just True) n v
+    updateVisited :: Char -> Map (Int, Int) Bool -> ((Int, Int), Maybe Char) -> Map (Int, Int) Bool
+    updateVisited _ v (_, Nothing)           = v
+    updateVisited c v ((n, Just m)) | c == m = Map.update (const $ Just True) n v
     updateVisited _ v _                      = v

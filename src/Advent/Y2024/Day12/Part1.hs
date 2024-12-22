@@ -13,11 +13,14 @@ answer g
   = evalState search
   $ RegionSearch (mkVisited g) g ortho sumPerimeter getSum 0
   where
-    sumPerimeter :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> Sum Int
+    sumPerimeter :: (Int, Int) -> [((Int, Int), Maybe Char)] -> Sum Int
     sumPerimeter _ xs = Sum $ length xs
 
-ortho :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
-ortho c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d) | d <- Grid.orthogonal ]
+ortho :: (Int, Int) -> Grid Char -> [((Int, Int), Maybe Char)]
+ortho c g = do
+  d <- Grid.orthogonal
+  let offset = c .+. Grid.offset d
+  pure $ (offset, Grid.getAt g offset)
 
 solution :: IO ()
 solution = do

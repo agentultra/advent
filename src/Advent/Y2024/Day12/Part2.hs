@@ -11,26 +11,14 @@ import qualified Data.Text.IO as T
 answer :: Grid Char -> Int
 answer g = evalState search $ RegionSearch (mkVisited g) g cardinal vertices sides 0
 
-cardinal :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
-cardinal c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d)
-               | d <- Grid.cardinal
-               ]
+cardinal :: (Int, Int) -> Grid Char -> [((Int, Int), Maybe Char)]
+cardinal c g = do
+  d <- Grid.cardinal
+  let offset = Grid.offset d
+  pure (offset, Grid.getAt g offset)
 
-vertices :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> [(Int, Int)]
+vertices :: (Int, Int) -> [((Int, Int), Maybe Char)] -> [(Int, Int)]
 vertices _ _ = []
-
-interiorAngle :: (Int, Int) -> [Maybe ((Int, Int), Char)] -> Int
-interiorAngle origin xs = go $ map toDir xs
-  where
-    toDir :: Maybe ((Int, Int), Char) -> Maybe Direction
-    toDir md
-      = fromMaybe (error "Invalid offset")
-      . (\d -> Grid.fromOffset (d .-. origin))
-      . fst <$> md
-
-    go :: [Maybe Direction] -> Int
-    go ds = sum [ getAngle c | c <- map (\f -> f ds) corners ]
-
 
 getAngle :: [Maybe Direction] -> Int
 getAngle ds = case sort ds of
