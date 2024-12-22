@@ -23,6 +23,7 @@ data RegionSearch
   = RegionSearch
   { _visited        :: Map (Int, Int) Bool
   , _grid           :: Grid Char
+  , _neighbours     :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
   , _perimeterSum   :: [Maybe ((Int, Int), Char)] -> Int
   , _perimeterTotal :: Int -> Int
   , _totalSum       :: Int
@@ -51,7 +52,8 @@ floodFill x = go [x] [x] 0 0
     go (y:ys) internal area perimeter = do
       g <- use grid
       ps <- use perimeterSum
-      let ns = neighbours y g
+      neighboursF <- use neighbours
+      let ns = neighboursF y g
           c = fromMaybe (error "couldn't get cell") $ Grid.getAt g y
           perimeter' = perimeter + ps (filter (isPerimeterCell c) ns)
           area' = area + 1
@@ -59,9 +61,6 @@ floodFill x = go [x] [x] 0 0
           stack' = map fst . filter (unvisitedInternalCell c internal) $ ncs
       visited %= (\v -> foldl' (updateVisited c) v (Just (y, c) : ns))
       go (stack' ++ ys) (internal ++ map fst ncs) area' perimeter'
-
-    neighbours :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
-    neighbours c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d) | d <- Grid.directions ]
 
     isPerimeterCell :: Char -> Maybe ((Int, Int), Char) -> Bool
     isPerimeterCell _ Nothing = True

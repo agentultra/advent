@@ -8,7 +8,10 @@ import Advent.Y2024.Day12.Input
 import qualified Data.Text.IO as T
 
 answer :: Grid Char -> Int
-answer g = evalState search $ RegionSearch (mkVisited g) g interiorAngle sides 0
+answer g = evalState search $ RegionSearch (mkVisited g) g cardinal interiorAngle sides 0
+
+cardinal :: (Int, Int) -> Grid Char -> [Maybe ((Int, Int), Char)]
+cardinal c g = [ (c .+. Grid.offset d,) <$> Grid.getAt g (c .+. Grid.offset d) | d <- Grid.cardinal ]
 
 interiorAngle :: [Maybe ((Int, Int), Char)] -> Int
 interiorAngle xs

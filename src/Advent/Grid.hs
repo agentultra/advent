@@ -78,19 +78,33 @@ toList g =
 
 data Direction
   = North
+  | NorthEast
   | East
+  | SouthEast
   | South
+  | SouthWest
   | West
+  | NorthWest
   deriving (Bounded, Enum, Eq, Ord, Show)
 
-directions :: [Direction]
-directions = universe
+orthogonal :: [Direction]
+orthogonal = [North, East, South, West]
+
+diagonal :: [Direction]
+diagonal = [NorthEast, SouthEast, SouthWest, NorthWest]
+
+cardinal :: [Direction]
+cardinal = universe
 
 offset :: Direction -> (Int, Int)
-offset North = (0, -1)
-offset East  = (1,  0)
-offset South = (0,  1)
-offset West  = (-1, 0)
+offset North     = (0, -1)
+offset NorthEast = (1, -1)
+offset East      = (1,  0)
+offset SouthEast = (1, 1)
+offset South     = (0,  1)
+offset SouthWest = (-1, 1)
+offset West      = (-1, 0)
+offset NorthWest = (-1, -1)
 
 (.+.) :: (Int, Int) -> (Int, Int) -> (Int, Int)
 (x1, y1) .+. (x2, y2) = (x1 + x2, y1 + y2)

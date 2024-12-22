@@ -34,7 +34,7 @@ findTrails select trailMap (Trailhead trailHead)
 
 validDirections :: (Int, Int) -> TrailMap -> [(Int, Int)]
 validDirections p tm = do
-  d <- Grid.directions
+  d <- Grid.orthogonal
   v <- maybeToList $ Grid.getAt tm.getTrailMap p
   let offsetP = p .+. Grid.offset d
   v' <- maybeToList $ Grid.getAt tm.getTrailMap offsetP
